@@ -54,5 +54,15 @@ public class DirectorView {
     public int numberOfDirectors(){
         return directorFacade.findAll().size();
     }
+
+    public String findDvd(){
+        if (directorFacade.find(this.toFind)!= null){            
+            return "found";
+        }else{
+            directorFacade.setToFind(this.toFind);
+            
+            return "nothing";
+        }        
+    }
     
 }
