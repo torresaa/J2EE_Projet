@@ -12,6 +12,8 @@
                 Add Dvd to the DB: <br/><br/>                
                 
                 <h:outputLabel value="Dvd Title:"/><h:inputText value="#{DvdView.dvd.title}"/><br/>
+                <h:outputLabel value="Dvd Director:"/><h:inputText value="#{DvdView.dvd.director}"/><br/>
+                <h:outputLabel value="Dvd Author:"/><h:inputText value="#{DvdView.dvd.author}"/><br/>
                 <h:commandButton action="#{DvdView.postDvd}" value="Post Dvd"/><br/><br/>
                 
                 Add Director to the DB: <br/><br/>
@@ -23,10 +25,15 @@
                 <h:outputLabel value="Author:"/><h:inputText value="#{AuthorView.author.author}"/><br/>
                 <h:outputLabel value="Dvd:"/><h:inputText value="#{AuthorView.author.title}"/><br/>
                 <h:commandButton action="#{AuthorView.postAuthor}" value="Post Author"/><br/><br/>
+                                
+                <h:outputLabel value="Find by title:"/><h:inputText value="#{DvdView.toFind}"/><br/>
+                <h:commandButton action="#{DvdView.findDvd}" value="Go!"/><br/><br/>        
                 
+                <h:outputLabel value="Find by director:"/><h:inputText value="#{DirectorView.toFind}"/><br/>
+                <h:commandButton action="#{DirectorView.findDirector}" value="Go!"/><br/><br/>
                 
-                <h:outputLabel value="Find by title, director or author:"/><h:inputText value="#{DvdView.toFind}"/><br/>
-                <h:commandButton action="#{DvdView.findDvd}" value="Go!"/><br/>        
+                <h:outputLabel value="Find by author:"/><h:inputText value="#{AuthorView.toFind}"/><br/>
+                <h:commandButton action="#{AuthorView.findAuthor}" value="Go!"/><br/><br/>
             </h:form>                                
         </f:view>    
     </h:body>        

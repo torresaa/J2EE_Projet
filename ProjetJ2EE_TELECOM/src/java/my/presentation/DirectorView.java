@@ -22,6 +22,7 @@ public class DirectorView {
     private DirectorFacade directorFacade;
     private Director director;
     private String toFind = "";    
+    
     public String getToFind() {
         return toFind;
     }
@@ -55,13 +56,11 @@ public class DirectorView {
         return directorFacade.findAll().size();
     }
 
-    public String findDvd(){
+    public String findDirector(){
         if (directorFacade.find(this.toFind)!= null){            
-            return "found";
+            return "founddirector";
         }else{
-            directorFacade.setToFind(this.toFind);
-            
-            return "nothing";
+            return "nothing";            
         }        
     }
     

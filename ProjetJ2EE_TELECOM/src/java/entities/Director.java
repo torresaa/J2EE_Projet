@@ -6,10 +6,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,8 +24,18 @@ public class Director implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String director;
-    @Id private String title;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "directordirector")
+    private List<Dvd> dvdList;
+    private String title;
 
+    public List<Dvd> getDvdList() {
+        return dvdList;
+    }
+
+    public void setDvdList(List<Dvd> dvdList) {
+        this.dvdList = dvdList;
+    }
+        
     public String getTitle() {
         return title;
     }

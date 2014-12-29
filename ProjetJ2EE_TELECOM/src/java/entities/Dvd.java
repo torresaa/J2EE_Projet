@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -23,6 +24,24 @@ public class Dvd implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)    
     private String title;
+    @Id private String director;
+    @Id private String author;
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
     
     public String getTitle() {
         return title;

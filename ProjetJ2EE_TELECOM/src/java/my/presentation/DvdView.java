@@ -21,9 +21,7 @@ public class DvdView {
     @EJB
     private DvdFacade dvdFacade;
     private Dvd dvd;
-    private String toFind = "";    
-    private DirectorView directorview = new DirectorView();
-    private AuthorView authorview = new AuthorView();
+    private String toFind = "";        
     
     public String getToFind() {
         return toFind;
@@ -62,8 +60,7 @@ public class DvdView {
         if (dvdFacade.find(this.toFind)!= null){            
             return "found";
         }else{
-            directorview.setToFind(this.toFind);            
-            return "nothing";
+            return "nothing";            
         }        
     }
     

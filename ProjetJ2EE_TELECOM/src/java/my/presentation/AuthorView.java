@@ -54,5 +54,13 @@ public class AuthorView {
     public int numberOfAuthors(){
         return authorFacade.findAll().size();
     }
+
+    public String findAuthor(){
+        if (authorFacade.find(this.toFind)!= null){            
+            return "foundauthor";
+        }else{            
+            return "nothing";
+        }        
+    }
     
 }
