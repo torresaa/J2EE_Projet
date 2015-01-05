@@ -42,8 +42,7 @@ public class AuthorView {
     }
     
     public String postAuthor(){
-        if(authorFacade.find(author.getTitle())!=null 
-                || (author.getTitle().equals("")||author.getAuthor().equals(""))){
+        if(author.getAuthorName().equals("")){
             return "notvalidpost";
         }else{
             authorFacade.create(author);

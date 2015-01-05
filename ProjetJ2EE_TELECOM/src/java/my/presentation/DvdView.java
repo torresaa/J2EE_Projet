@@ -44,7 +44,7 @@ public class DvdView {
     }
     
     public String postDvd(){
-        if(dvdFacade.find(dvd.getTitle())!=null || dvd.getTitle().equals("")){
+        if(dvdFacade.find(dvd.getDvdTitle())!=null || dvd.getDvdTitle().equals("")){
             return "notvalidpost";
         }else{
             dvdFacade.create(dvd);

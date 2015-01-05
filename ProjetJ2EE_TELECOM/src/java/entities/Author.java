@@ -7,26 +7,54 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author User
  */
 @Entity
+@Table(name = "author")
 public class Author implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String author;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorauthor")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idAuthor")
+    private Integer idAuthor;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "authorName")
+    private String authorName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoridAuthor")
     private List<Dvd> dvdList;
-    private String title;
+
+    public Integer getIdAuthor() {
+        return idAuthor;
+    }
+
+    public void setIdAuthor(Integer idAuthor) {
+        this.idAuthor = idAuthor;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
 
     public List<Dvd> getDvdList() {
         return dvdList;
@@ -35,28 +63,11 @@ public class Author implements Serializable {
     public void setDvdList(List<Dvd> dvdList) {
         this.dvdList = dvdList;
     }
-
-    
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }        
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (author != null ? author.hashCode() : 0);
+        hash += (idAuthor != null ? idAuthor.hashCode() : 0);
         return hash;
     }
 
@@ -67,7 +78,7 @@ public class Author implements Serializable {
             return false;
         }
         Author other = (Author) object;
-        if ((this.author == null && other.author != null) || (this.author != null && !this.author.equals(other.author))) {
+        if ((this.idAuthor == null && other.idAuthor != null) || (this.idAuthor != null && !this.idAuthor.equals(other.idAuthor))) {
             return false;
         }
         return true;
@@ -75,7 +86,7 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Author[ id=" + author + " ]";
+        return "entities.Author[ id=" + idAuthor + " ]";
     }
     
 }

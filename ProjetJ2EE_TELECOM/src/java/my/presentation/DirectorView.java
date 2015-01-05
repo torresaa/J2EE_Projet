@@ -43,8 +43,7 @@ public class DirectorView {
     }
     
     public String postDirector(){
-        if(directorFacade.find(director.getTitle())!=null 
-                || (director.getTitle().equals("")||director.getDirector().equals(""))){
+        if(director.getDirectorName().equals("")){
             return "notvalidpost";
         }else{
             directorFacade.create(director);

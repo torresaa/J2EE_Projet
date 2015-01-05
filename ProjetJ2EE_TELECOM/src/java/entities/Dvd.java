@@ -6,63 +6,87 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author User
  */
 @Entity
+@Table(name = "dvd")
 public class Dvd implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    private Long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)    
-    private String title;
-    @Id private String director;
-    @Id private String author;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idDVDs")    
+    private Integer idDVDs;
+    @Size(max = 45)
+    @Column(name = "dvdTitle")
+    private String dvdTitle;    
+    @Column(name = "quantity")
+    private Integer quantity;
+    @JoinColumn(name = "Author_idAuthor", referencedColumnName = "idAuthor")
+    @ManyToOne(optional = false)
+    private Author authoridAuthor;
+    @JoinColumn(name = "Director_idDirector", referencedColumnName = "idDirector")
+    @ManyToOne(optional = false)    
+    private Director directoridDirector;
 
-    public String getDirector() {
-        return director;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
     
-    public String getTitle() {
-        return title;
+
+    public Director getDirectoridDirector() {
+        return directoridDirector;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDirectoridDirector(Director director) {
+        this.directoridDirector = director;
+    }
+
+    public Author getAuthoridAuthor() {
+        return authoridAuthor;
+    }
+
+    public void setAuthoridAuthor(Author author) {
+        this.authoridAuthor = author;
     }
     
-    public Long getId() {
-        return id;
+    public String getDvdTitle() {
+        return dvdTitle;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDvdTitle(String title) {
+        this.dvdTitle = title;
+    }
+    
+    public Integer getIdDVDs() {
+        return this.idDVDs;
+    }
+
+    public void setIdDVDs(Integer id) {
+        this.idDVDs = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idDVDs != null ? idDVDs.hashCode() : 0);
         return hash;
     }
 
@@ -73,7 +97,7 @@ public class Dvd implements Serializable {
             return false;
         }
         Dvd other = (Dvd) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idDVDs == null && other.idDVDs != null) || (this.idDVDs != null && !this.idDVDs.equals(other.idDVDs))) {
             return false;
         }
         return true;
@@ -81,7 +105,7 @@ public class Dvd implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Dvd[ id=" + id + " ]";
+        return "entities.Dvd[ id=" + idDVDs + " ]";
     }
     
 }
