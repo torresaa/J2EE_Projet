@@ -29,12 +29,8 @@ public class Author implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "idAuthor")
     private Integer idAuthor;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "authorName")
     private String authorName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoridAuthor")

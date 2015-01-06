@@ -29,12 +29,8 @@ public class Director implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
     @Column(name = "idDirector")    
     private Integer idDirector;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "directorName")
     private String directorName;    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "directoridDirector")

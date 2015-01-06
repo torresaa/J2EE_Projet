@@ -9,19 +9,8 @@
     <h:body>
         <f:view>           
             <h:form>
-                <!h:commandButton action="signup" value="Sign up"/>
-                <!h:commandButton action="login" value="Log in"/>
                 <h:commandButton action="admin" value="Admin Mode"/>
                 <h:commandButton action="client" value="Client Mode"/>
-
-                <h:outputLabel value="Find by title:"/><h:inputText value="#{DvdView.toFind}"/><br/>
-                <h:commandButton action="#{DvdView.findDvd}" value="Go!"/><br/><br/>        
-                
-                <h:outputLabel value="Find by director:"/><h:inputText value="#{DirectorView.toFind}"/><br/>
-                <h:commandButton action="#{DirectorView.findDirector}" value="Go!"/><br/><br/>
-                
-                <h:outputLabel value="Find by author:"/><h:inputText value="#{AuthorView.toFind}"/><br/>
-                <h:commandButton action="#{AuthorView.findAuthor}" value="Go!"/><br/><br/>
             </h:form>                                
         </f:view>    
     </h:body>        

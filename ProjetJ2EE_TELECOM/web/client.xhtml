@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Amazonas</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h:outputLabel value="Find by title:"/><h:inputText value="#{DvdView.toFind}"/><br/>
+                <h:commandButton action="#{DvdView.findDvd}" value="Go!"/><br/><br/>        
+                
+                <h:outputLabel value="Find by director:"/><h:inputText value="#{DirectorView.toFind}"/><br/>
+                <h:commandButton action="#{DirectorView.findDirector}" value="Go!"/><br/><br/>
+                
+                <h:outputLabel value="Find by author:"/><h:inputText value="#{AuthorView.toFind}"/><br/>
+                <h:commandButton action="#{AuthorView.findAuthor}" value="Go!"/><br/><br/>                
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

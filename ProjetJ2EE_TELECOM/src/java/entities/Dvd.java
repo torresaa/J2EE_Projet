@@ -27,10 +27,8 @@ public class Dvd implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "idDVDs")    
     private Integer idDVDs;
-    @Size(max = 45)
     @Column(name = "dvdTitle")
     private String dvdTitle;    
     @Column(name = "quantity")

@@ -42,7 +42,7 @@ public class DirectorView {
         return director;
     }
     
-    public String postDirector(){
+    public String postDirector(){   
         if(director.getDirectorName().equals("")){
             return "notvalidpost";
         }else{
