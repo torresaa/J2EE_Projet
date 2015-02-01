@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,16 +24,12 @@ import javax.validation.constraints.Size;
  * @author User
  */
 @Entity
-@Table(name = "dvd")
 public class Dvd implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDVDs")    
     private Integer idDVDs;
-    @Column(name = "dvdTitle")
     private String dvdTitle;    
-    @Column(name = "quantity")
     private Integer quantity;
     @JoinColumn(name = "Author_idAuthor", referencedColumnName = "idAuthor")
     @ManyToOne(optional = false)

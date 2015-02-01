@@ -21,7 +21,7 @@ public class AuthorView {
     @EJB
     private AuthorFacade authorFacade;
     private Author author;
-    private String toFind = "";    
+    private String toFind = "";       
     public String getToFind() {
         return toFind;
     }

@@ -5,10 +5,12 @@
  */
 package boundary;
 
-import entities.Director;
+import entities.Director; 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +29,13 @@ public class DirectorFacade extends AbstractFacade<Director> {
     public DirectorFacade() {
         super(Director.class);
     }
-    
+    public Director findByName(String name){
+        Query q = em.createQuery("SELECT d FROM Director d WHERE d.directorName= :name").
+                setParameter("name", name);
+        try{
+            return (Director) q.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+    }    
 }

@@ -22,23 +22,14 @@ import javax.validation.constraints.Size;
  * @author User
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Users.findByUsername", 
-            query = "SELECT u FROM Users u WHERE u.username = :username")
-})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idUser")    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
-    @Column(name = "Name")
     private String name;
-    @Column(name = "Username")
     private String username;
-    @Column(name = "Password")
     private String password;
-    @Column(name = "Email")
     private String email;
 
     public String getName() {

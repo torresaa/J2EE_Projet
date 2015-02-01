@@ -44,7 +44,30 @@ public class UserView {
     }
     
     public String login(){
-        
-        return "";
+        if(this.user.getUsername()!=null && this.user.getPassword()!= null){
+            this.user = this.usersFacade.findUser(user.getUsername(), user.getPassword());
+            if (this.user == null){
+                this.user = this.usersFacade.findUserByEmail(user.getUsername(), user.getPassword());
+                if (this.user == null){
+                    return "";
+                }else{
+                    if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
+                            ||user.getUsername().equals("Omar")){
+                        return "admin";
+                    }else{
+                        return "client";
+                    }
+                }
+            }else{
+                if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
+                            ||user.getUsername().equals("Omar")){
+                    return "admin";
+                }else{
+                    return "client";
+                }                
+            }
+        }else{
+            return "";
+        }
     }
 }

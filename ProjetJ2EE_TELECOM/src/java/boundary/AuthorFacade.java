@@ -6,9 +6,13 @@
 package boundary;
 
 import entities.Author;
+import entities.Dvd;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +32,14 @@ public class AuthorFacade extends AbstractFacade<Author> {
         super(Author.class);
     }
     
+    public Author findByName(String name){       
+        Query q = em.createQuery("SELECT a FROM Author a WHERE a.authorName= :name").
+                setParameter("name", name);
+        try{
+            return (Author) q.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+    }
+
 }

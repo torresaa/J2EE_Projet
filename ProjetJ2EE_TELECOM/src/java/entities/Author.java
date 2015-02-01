@@ -7,31 +7,23 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author User
  */
 @Entity
-@Table(name = "author")
 public class Author implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idAuthor")
-    private Integer idAuthor;
-    @Column(name = "authorName")
+    private Integer idAuthor;    
     private String authorName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoridAuthor")
     private List<Dvd> dvdList;

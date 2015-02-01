@@ -10,13 +10,7 @@
         <f:view>
             <h:form>
                 <h:outputLabel value="Find by title:"/><h:inputText value="#{DvdView.toFind}"/><br/>
-                <h:commandButton action="#{DvdView.findDvd}" value="Go!"/><br/><br/>        
-                
-                <h:outputLabel value="Find by director:"/><h:inputText value="#{DirectorView.toFind}"/><br/>
-                <h:commandButton action="#{DirectorView.findDirector}" value="Go!"/><br/><br/>
-                
-                <h:outputLabel value="Find by author:"/><h:inputText value="#{AuthorView.toFind}"/><br/>
-                <h:commandButton action="#{AuthorView.findAuthor}" value="Go!"/><br/><br/>                
+                <h:commandButton action="#{DvdView.findDvd()}" value="Go!"/><br/><br/>                        
             </h:form>
         </f:view>
     </h:body>

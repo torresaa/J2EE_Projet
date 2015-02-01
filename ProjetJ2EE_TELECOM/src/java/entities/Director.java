@@ -24,14 +24,11 @@ import javax.validation.constraints.Size;
  * @author User
  */
 @Entity
-@Table(name = "director")
 public class Director implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idDirector")    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Integer idDirector;
-    @Column(name = "directorName")
     private String directorName;    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "directoridDirector")
     private List<Dvd> dvdList;
