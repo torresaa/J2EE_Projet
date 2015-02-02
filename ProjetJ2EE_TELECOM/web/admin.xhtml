@@ -1,24 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Amazonas</title>
-    </h:head>
-    <h:body>
-        <f:view>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
             <h:form>
 
                 Add Dvd to the DB: <br/><br/>                                
-                <h:outputLabel value="Dvd Title:"/><h:inputText value="#{DvdView.dvd.dvdTitle}"/><br/>
-                <h:outputLabel value="Dvd Quantity:"/><h:inputText value="#{DvdView.dvd.quantity}"/><br/>
-                <h:outputLabel value="Dvd Director:"/><h:inputText value="#{DvdView.directorName}"/><br/>
-                <h:outputLabel value="Dvd Author:"/><h:inputText value="#{DvdView.authorName}"/><br/>
-                <h:commandButton action="#{DvdView.postDvd()}" value="Post Dvd"/><br/><br/>                               
+                <h:outputLabel value="Dvd Title:"/><h:inputText value="#{dvdView.dvd.dvdTitle}"/><br/>
+                <h:outputLabel value="Dvd Quantity:"/><h:inputText value="#{dvdView.dvd.quantity}"/><br/>
+                <h:outputLabel value="Dvd Director:"/><h:inputText value="#{dvdView.directorName}"/><br/>
+                <h:outputLabel value="Dvd Author:"/><h:inputText value="#{dvdView.authorName}"/><br/>
+                <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                               
                                              
             </h:form>
-        </f:view>
-    </h:body>
-</html>
-
+    </ui:define>
+</ui:composition>

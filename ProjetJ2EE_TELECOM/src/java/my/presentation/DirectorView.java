@@ -15,7 +15,7 @@ import javax.faces.bean.RequestScoped;
  *
  * @author User
  */
-@ManagedBean(name = "DirectorView")
+@ManagedBean(name = "directorView")
 @RequestScoped
 public class DirectorView {
     @EJB

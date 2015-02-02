@@ -17,13 +17,14 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author User
  */
-@ManagedBean(name = "DvdView")
-@SessionScoped
+@ManagedBean(name = "dvdView")
+@RequestScoped
 public class DvdView {
 
     @EJB

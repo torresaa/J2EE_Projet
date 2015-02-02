@@ -15,7 +15,7 @@ import javax.faces.bean.RequestScoped;
  *
  * @author User
  */
-@ManagedBean(name = "AuthorView")
+@ManagedBean(name = "authorView")
 @RequestScoped
 public class AuthorView {
     @EJB
