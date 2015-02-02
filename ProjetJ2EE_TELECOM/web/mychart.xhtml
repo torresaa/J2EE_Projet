@@ -6,37 +6,89 @@
                 template="/WEB-INF/templates/template.xhtml">
 
     <ui:define name="content">
-        <h:form>
-            <h:dataTable value="#{OrdersView.ordersList}" var="o"
-                         styleClass="order-table"
-                         headerClass="order-table-header"
-                         rowClasses="order-table-odd-row,order-table-even-row">
-                <h:column>
-                    <!-- column header -->
-                    <f:facet name="header">Title</f:facet>
-                    <!-- row record -->
-                    <h:outputLabel>#{o.dvdTitle}</h:outputLabel>                        
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Author</f:facet>
-                    <h:outputLabel>#{o.authoridAuthor.authorName}</h:outputLabel>                        
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Director</f:facet>
-                    <h:outputLabel>#{o.directoridDirector.directorName}</h:outputLabel>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Quantity</f:facet>
-                    <h:outputLabel>#{o.quantity}</h:outputLabel> 
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Remove from chart</f:facet>
-                    <h:commandButton value="Remove" action="#{OrdersView.removeOder(o)}">
-                        <f:param name="action" value="delete" />
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
-            <h:commandButton value="Pay !" action="paypage"/>
-        </h:form>
+        <ui:repeat value="#{sesionBean.ordersList}" var="o">
+            hola
+            <div class="found">
+                <h:form>
+                    <table style="width: inherit">
+                        <tr>
+                            <td style="width: 100px; height: 100px">
+                                <!--                            Here is for future picture-->
+                            </td>
+                            <td style="width: available">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Title:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvd.dvdTitle}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Author:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvd.authoridAuthor.authorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Director:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvd.directoridDirector.directorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="height: 10px"></tr>
+                                </table>
+                            </td>
+                            <td style="width: 50px"></td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="valeu">
+                                                Quantity:
+                                            </a>
+                                            <h:outputLabel value="#{o.dvd.quantity = 1}" />
+                                        </td>
+                                        <td>
+                                            <h:commandButton value="Remove"
+                                                             action="#{sesionBean.removeOder(o)}" >
+                                            </h:commandButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>            
+        </ui:repeat>
+
+<!--        <div class="footer">
+            <form>
+                <h:commandButton action="paypage">
+                    value="Pay !"
+                </h:commandButton>
+            </form>
+        </div>-->
     </ui:define>
 </ui:composition>

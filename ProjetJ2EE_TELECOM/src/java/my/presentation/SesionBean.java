@@ -65,8 +65,8 @@ public class SesionBean implements Serializable {
         this.ordersList.add(new Product(dvd));
     }
 
-    public void removeOder(Dvd dvd) {
-        this.ordersList.remove(dvd);
+    public void removeOder(Product p) {
+        this.ordersList.remove(p);
     }
     
     public String getToFind() {
