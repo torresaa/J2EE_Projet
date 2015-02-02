@@ -8,7 +8,13 @@
     <ui:define name="content">
         <div class="tituloSecciones">My Chart</div>
         <ui:repeat value="#{sesionBean.ordersList}" var="o">
-            <div class="found">
+            <ui:fragment rendered="#{o.shippable}"> 
+                <div class="shippeable"> 
+            </ui:fragment> 
+            
+            <ui:fragment rendered="#{!o.shippable}"> 
+                <div class="notShippeable"> 
+            </ui:fragment>
                 <h:form>
                     <table style="width: inherit">
                         <tr>
