@@ -5,17 +5,33 @@
  */
 package my.presentation;
 
+import entities.Users;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author aquilest
  */
-@ManagedBean
-@RequestScoped
-public class Sesion {
+@ManagedBean(name = "sesionBean")
+@SessionScoped
+public class SesionBean implements Serializable{
     private String header;
+    private String toFind = "";
+    
+    private Users user;
+    private boolean login = false;
+    private boolean admin = false; 
+    
+
+    public String getToFind() {
+        return toFind;
+    }
+
+    public void setToFind(String toFind) {
+        this.toFind = toFind;
+    }
 
     public String getHeader() {
         return header;

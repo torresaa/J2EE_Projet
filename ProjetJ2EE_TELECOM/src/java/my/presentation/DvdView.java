@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -24,19 +25,47 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "DvdView")
 @SessionScoped
 public class DvdView {
+
     @EJB
     private DirectorFacade directorFacade;
     @EJB
     private AuthorFacade authorFacade;
     @EJB
-    private DvdFacade dvdFacade;        
-    private List<Dvd> dvdList= new ArrayList<>();
+    private DvdFacade dvdFacade;
+
+    private List<Dvd> dvdList = new ArrayList<>();
     private Dvd dvd;
     private Author author;
     private Director director;
-    private String toFind = "";        
     private String authorName = "";
     private String directorName = "";
+
+    @ManagedProperty(value = "#{SesionBean}")
+    private SesionBean sesion;
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Director getDirector() {
+        return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
+    }
+
+    public SesionBean getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(SesionBean sesion) {
+        this.sesion = sesion;
+    }
 
     public List<Dvd> getDvdList() {
         return dvdList;
@@ -61,41 +90,35 @@ public class DvdView {
     public void setDirectorName(String directorName) {
         this.directorName = directorName;
     }
-    
-    
-    public String getToFind() {
-        return toFind;
-    }
 
-    public void setToFind(String toFind) {
-        this.toFind = toFind;
-    }
-    
-    
     /**
      * Creates a new instance of DvdView
      */
     public DvdView() {
-        this.dvd =  new Dvd();
+        this.dvd = new Dvd();
         this.author = new Author();
         this.director = new Director();
     }
-    
-    public Dvd getDvd(){
+
+    public Dvd getDvd() {
         return dvd;
     }
-    
-    public String postDvd(){
-        if(dvd.getQuantity() == 0 || dvd.getDvdTitle().equals("")
-                || this.directorName.equals("") 
-                || this.authorName.equals("")){
+
+    public void setDvd(Dvd dvd) {
+        this.dvd = dvd;
+    }
+
+    public String postDvd() {
+        if (dvd.getQuantity() == 0 || dvd.getDvdTitle().equals("")
+                || this.directorName.equals("")
+                || this.authorName.equals("")) {
             return "notvalidpost";
-        }else{      
-            if (authorFacade.findByName(authorName) == null){
+        } else {
+            if (authorFacade.findByName(authorName) == null) {
                 author.setAuthorName(authorName);
                 authorFacade.create(author);
             }
-            if (directorFacade.findByName(directorName) == null){
+            if (directorFacade.findByName(directorName) == null) {
                 director.setDirectorName(directorName);
                 directorFacade.create(director);
             }
@@ -105,48 +128,48 @@ public class DvdView {
             return "posted";
         }
     }
-    
-    public int numberOfDvds(){
+
+    public int numberOfDvds() {
         return dvdFacade.findAll().size();
     }
-    
-    public String findDvd(){
-        this.dvdList= dvdFacade.findByName(toFind);
-        if (this.dvdList.isEmpty()){            
-            this.dvdList = dvdFacade.findDvdByAuthor(toFind);
-            if (this.dvdList.isEmpty()){
-                this.dvdList = dvdFacade.findDvdByDirector(toFind);
-                if (this.dvdList.isEmpty()){
+
+    public String findDvd() {
+        this.dvdList = dvdFacade.findByName(sesion.getToFind());
+        if (this.dvdList.isEmpty()) {
+            this.dvdList = dvdFacade.findDvdByAuthor(sesion.getToFind());
+            if (this.dvdList.isEmpty()) {
+                this.dvdList = dvdFacade.findDvdByDirector(sesion.getToFind());
+                if (this.dvdList.isEmpty()) {
                     return "nothing";
-                }else{
+                } else {
                     return "found";
                 }
-            }else{
+            } else {
                 return "found";
-            }            
-        }else{            
-            return "found";            
-        }        
-    }
-    
-    public String findByAuthor(){
-        if (dvdFacade.findDvdByAuthor(toFind) == null){
-            return "nothing";
-        }else{
-            this.author.setDvdList(dvdFacade.findDvdByAuthor(toFind));
-            this.dvdList = this.author.getDvdList();
-            return "found";
-        }
-        
-    }
-    
-    public String findByDirector(){
-        this.director.setDvdList(dvdFacade.findDvdByDirector(toFind));
-        if (dvdFacade.findDvdByDirector(toFind)==null){
-            return "nothing";
-        }else{
-            this.dvdList= this.director.getDvdList();
+            }
+        } else {
             return "found";
         }
     }
+
+//    public String findByAuthor(){
+//        if (dvdFacade.findDvdByAuthor(toFind) == null){
+//            return "nothing";
+//        }else{
+//            this.author.setDvdList(dvdFacade.findDvdByAuthor(toFind));
+//            this.dvdList = this.author.getDvdList();
+//            return "found";
+//        }
+//        
+//    }
+//    
+//    public String findByDirector(){
+//        this.director.setDvdList(dvdFacade.findDvdByDirector(toFind));
+//        if (dvdFacade.findDvdByDirector(toFind)==null){
+//            return "nothing";
+//        }else{
+//            this.dvdList= this.director.getDvdList();
+//            return "found";
+//        }
+//    }
 }

@@ -21,15 +21,6 @@ public class DirectorView {
     @EJB
     private DirectorFacade directorFacade;
     private Director director;
-    private String toFind = "";    
-    
-    public String getToFind() {
-        return toFind;
-    }
-
-    public void setToFind(String toFind) {
-        this.toFind = toFind;
-    }
     
     /**
      * Creates a new instance of DirectorView
@@ -54,13 +45,4 @@ public class DirectorView {
     public int numberOfDirectors(){
         return directorFacade.findAll().size();
     }
-
-    public String findDirector(){
-        if (directorFacade.find(this.toFind)!= null){            
-            return "founddirector";
-        }else{
-            return "nothing";            
-        }        
-    }
-    
 }

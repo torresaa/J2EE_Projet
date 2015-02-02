@@ -18,20 +18,22 @@
                 <div>
                     <ul id="menu">
                         <li>
-                            <h:link hreflang="google.com">SEARCH</h:link>
+                            <h:link outcome="index">
+                                <h4>SEARCH</h4>
+                            </h:link>
                         </li>
                         <li>
-                            <h:link onclick="#{Sesion.goToLogin()}">
+                            <h:link outcome="login">
                                 <h4>LOGIN</h4>
                             </h:link>
                         </li>
                         <li>
-                            <h:link onclick="#{Sesion.goToSignin()}">
+                            <h:link outcome="signup">
                                 <h4>SIGNUP</h4>
                             </h:link>
                         </li>
                         <li>
-                            <a id="cady">
+                            <a>
                                 <h4>CHARRIOT</h4>
                             </a>
                         </li>
