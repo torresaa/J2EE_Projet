@@ -112,16 +112,6 @@ public class OrdersView implements Serializable {
         return "";
     }
 
-    public String editAction() {
-
-        Map<String, String> params;
-        params = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String action = params.get("action");
-        //...
-        System.out.println("Action = " + action);
-        return action;
-    }
-
     public void removeOder(Dvd dvd) {
         this.ordersList.remove(dvd);
     }
@@ -136,6 +126,17 @@ public class OrdersView implements Serializable {
                 fromOrders = true;
                 return "login";    
             }
+        }
+    }
+
+    public String payGestion(){
+        if (loged){
+            for (Dvd film: ordersList){
+                ordersFacade.find(film.getIdDVDs());
+            }                   
+            return "logedchart";
+        }else{
+            return "login";
         }
     }
 }
