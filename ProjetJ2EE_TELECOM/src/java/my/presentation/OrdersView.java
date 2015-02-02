@@ -23,7 +23,7 @@ import javax.servlet.ServletContext;
  *
  * @author User
  */
-@ManagedBean(name = "OrdersView")
+@ManagedBean(name = "ordersView")
 @SessionScoped
 public class OrdersView implements Serializable {
 
@@ -42,6 +42,7 @@ public class OrdersView implements Serializable {
      * Creates a new instance of OrdersView
      */
     public OrdersView() {
+        user = new Users();
         this.orders = new Orders();
         this.ordersList = new ArrayList<>();
     }

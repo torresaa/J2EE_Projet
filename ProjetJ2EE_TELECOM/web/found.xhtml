@@ -1,17 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Amazonas</title>
-    </h:head>
-    <h:body>
-        <f:view>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
             <h:form>
-                <h:dataTable value="#{DvdView.dvdList}" var="o"
+                <h:dataTable value="#{dvdView.dvdList}" var="o"
                              styleClass="order-table"
                              headerClass="order-table-header"
                              rowClasses="order-table-odd-row,order-table-even-row">
@@ -35,13 +31,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Add to Chart</f:facet>
-                        <h:commandButton value="Add" action="#{OrdersView.insertOrder(o)}">
+                        <h:commandButton value="Add" action="#{ordersView.insertOrder(o)}">
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
-                <h:commandButton value="Go to my chart" action="#{OrdersView.seeMyChart()}"></h:commandButton>
+                <h:commandButton value="Go to my chart" action="#{ordersView.seeMyChart()}"></h:commandButton>
             </h:form>
-        </f:view>        
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>
 

@@ -16,14 +16,14 @@ import javax.faces.bean.RequestScoped;
  *
  * @author User
  */
-@ManagedBean(name = "#{userView}")
+@ManagedBean(name = "userView")
 @RequestScoped
 public class UserView {
     @EJB
     private UsersFacade usersFacade;
     private Users user;
-    @ManagedProperty(value = "#{OrdersView}")
-    private OrdersView OrdersView;
+    @ManagedProperty(value = "#{ordersView}")
+    private OrdersView ordersView;
     /**
      * Creates a new instance of UserView
      */
@@ -32,11 +32,11 @@ public class UserView {
     }
 
     public OrdersView getOrdersView() {
-        return OrdersView;
+        return ordersView;
     }
 
-    public void setOrdersView(OrdersView OrdersView) {
-        this.OrdersView = OrdersView;
+    public void setOrdersView(OrdersView ordersView) {
+        this.ordersView = ordersView;
     }
 
     public Users getUser() {
@@ -62,9 +62,9 @@ public class UserView {
                 if (this.user == null){
                     return "";
                 }else{
-                    OrdersView.setLoged(true);
-                    OrdersView.setUser(user);
-                    if (!OrdersView.isFromOrders()){
+                    ordersView.setLoged(true);
+                    ordersView.setUser(user);
+                    if (!ordersView.isFromOrders()){
                         if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
                                 ||user.getUsername().equals("Omar")){
                             return "admin";
