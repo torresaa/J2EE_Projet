@@ -9,10 +9,15 @@
         <h:form>
             <h:outputLabel value="Name:"/><h:inputText value="#{userView.user.name}"/><br/>
             <h:outputLabel value="Username:"/><h:inputText value="#{userView.user.username}"/><br/>
-            <h:outputLabel value="Password:"/><h:inputSecret value="#{userView.user.password}"/><br/>
+            <h:outputLabel value="Password:"/><h:inputText value="#{userView.user.password}"/><br/>
             <h:outputLabel value="E-mail:"/><h:inputText value="#{userView.user.email}"/><br/>
             <h:commandButton  action="#{userView.postUser()}" value="Sign up"/>                
         </h:form>
+        <div class="result">
+            <h2 style="color: red">
+                User can not be created, please verify your data.
+            </h2>
+        </div>
     </ui:define>
 </ui:composition>
 

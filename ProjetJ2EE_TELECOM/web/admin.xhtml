@@ -7,14 +7,12 @@
 
     <ui:define name="content">
             <h:form>
-
                 Add Dvd to the DB: <br/><br/>                                
                 <h:outputLabel value="Dvd Title:"/><h:inputText value="#{dvdView.dvd.dvdTitle}"/><br/>
                 <h:outputLabel value="Dvd Quantity:"/><h:inputText value="#{dvdView.dvd.quantity}"/><br/>
                 <h:outputLabel value="Dvd Director:"/><h:inputText value="#{dvdView.directorName}"/><br/>
                 <h:outputLabel value="Dvd Author:"/><h:inputText value="#{dvdView.authorName}"/><br/>
-                <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                               
-                                             
+                <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                                                                        
             </h:form>
     </ui:define>
 </ui:composition>

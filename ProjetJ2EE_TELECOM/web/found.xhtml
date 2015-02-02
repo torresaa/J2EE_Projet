@@ -3,40 +3,85 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                template="/WEB-INF/templates/template.xhtml">
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
-            <h:form>
-                <h:dataTable value="#{dvdView.dvdList}" var="o"
-                             styleClass="order-table"
-                             headerClass="order-table-header"
-                             rowClasses="order-table-odd-row,order-table-even-row">
-                    <h:column>
-                        <!-- column header -->
-                        <f:facet name="header">Title</f:facet>
-                        <!-- row record -->
-                        <h:outputLabel>#{o.dvdTitle}</h:outputLabel>                        
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Author</f:facet>
-                        <h:outputLabel>#{o.authoridAuthor.authorName}</h:outputLabel>                        
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Director</f:facet>
-                        <h:outputLabel>#{o.directoridDirector.directorName}</h:outputLabel>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Quantity</f:facet>
-                        <h:inputText value="#{o.quantity}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Add to Chart</f:facet>
-                        <h:commandButton value="Add" action="#{ordersView.insertOrder(o)}">
-                        </h:commandButton>
-                    </h:column>
-                </h:dataTable>
-                <h:commandButton value="Go to my chart" action="#{ordersView.seeMyChart()}"></h:commandButton>
-            </h:form>
+        <ui:repeat value="#{dvdView.dvdList}" var="o">
+            <div class="found">
+                <h:form>
+                    <table style="width: inherit">
+                        <tr>
+                            <td style="width: 100px; height: 100px">
+                                <!--                            Here is for future picture-->
+                            </td>
+                            <td style="width: available">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Title:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvdTitle}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Author:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.authoridAuthor.authorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Director:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.directoridDirector.directorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="height: 10px"></tr>
+                                </table>
+                            </td>
+                            <td style="width: 50px"></td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="valeu">
+                                                Quantity:
+                                            </a>
+                                            <h:inputText maxlength="3" size="3" value="#{o.quantity = 1}" />
+                                        </td>
+                                        <td>
+                                            <h:commandButton value="Add"
+                                                             action="#{sesionBean.insertOrder(o)}" >
+                                            </h:commandButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>            
+        </ui:repeat>
     </ui:define>
 </ui:composition>
 
