@@ -19,72 +19,76 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "userView")
 @RequestScoped
 public class UserView {
+
     @EJB
     private UsersFacade usersFacade;
     private Users user;
-    @ManagedProperty(value = "#{ordersView}")
-    private OrdersView ordersView;
+    @ManagedProperty(value = "#{sesionBean}")
+    private SesionBean sesionBean;
+
     /**
      * Creates a new instance of UserView
      */
     public UserView() {
-        this.user = new Users();              
+        this.user = new Users();
     }
 
-    public OrdersView getOrdersView() {
-        return ordersView;
+    public SesionBean getSesionBean() {
+        return sesionBean;
     }
 
-    public void setOrdersView(OrdersView ordersView) {
-        this.ordersView = ordersView;
+    public void setSesionBean(SesionBean sesionBean) {
+        this.sesionBean = sesionBean;
     }
 
     public Users getUser() {
         return user;
     }
-    
-    public String postUser(){
-        if (this.user.getEmail()!=null && this.user.getName()!=null
-                && this.user.getPassword()!=null 
-                && this.user.getUsername()!=null){
+
+    public String postUser() {
+        if (this.user.getEmail() != null && this.user.getName() != null
+                && this.user.getPassword() != null
+                && this.user.getUsername() != null) {
             usersFacade.create(user);
             return "validsignup";
-        }else{
-            return "";
-        }        
+        } else {
+            return "signup_wrong";
+        }
     }
-    
-    public String login(){
-        if(this.user.getUsername()!=null && this.user.getPassword()!= null){
-            this.user = this.usersFacade.findUser(user.getUsername(), user.getPassword());
-            if (this.user == null){
-                this.user = this.usersFacade.findUserByEmail(user.getUsername(), user.getPassword());
-                if (this.user == null){
-                    return "";
-                }else{
-                    ordersView.setLoged(true);
-                    ordersView.setUser(user);
-                    if (!ordersView.isFromOrders()){
-                        if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
-                                ||user.getUsername().equals("Omar")){
-                            return "admin";
-                        }else{
-                            return "client";
-                        }
-                    }else{
-                        return "mychart";
+
+    public String login() {
+        if (this.user.getUsername() != null && this.user.getPassword() != null) {
+            Users verifyUser = new Users();
+            verifyUser = this.usersFacade.findUser(user.getUsername(), user.getPassword());
+            if (verifyUser == null) {
+                verifyUser = this.usersFacade.findUserByEmail(user.getUsername(), user.getPassword());
+                if (verifyUser == null) {
+                    return "login_wrong";
+                } else {
+                    if (verifyUser.getUsername().equals("Jorge") || verifyUser.getUsername().equals("Aquiles")
+                            || verifyUser.getUsername().equals("Omar")) {
+                        sesionBean.setLoged(true);
+                        sesionBean.setUser(verifyUser);
+                        sesionBean.setAdmin(true);
+                    } else {
+                        sesionBean.setLoged(true);
+                        sesionBean.setUser(verifyUser);
                     }
                 }
-            }else{
-                if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
-                            ||user.getUsername().equals("Omar")){
-                    return "admin";
-                }else{
-                    return "client";
-                }                
+            } else {
+                if (user.getUsername().equals("Jorge") || user.getUsername().equals("Aquiles")
+                        || user.getUsername().equals("Omar")) {
+                    sesionBean.setLoged(true);
+                    sesionBean.setUser(verifyUser);
+                    sesionBean.setAdmin(true);
+                } else {
+                    sesionBean.setLoged(true);
+                    sesionBean.setUser(verifyUser);
+                }
             }
-        }else{
-            return "";
+        } else {
+            return "login_wrong";
         }
+        return "index";
     }
 }

@@ -16,7 +16,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -41,7 +40,7 @@ public class DvdView {
     private String authorName = "";
     private String directorName = "";
 
-    @ManagedProperty(value = "#{SesionBean}")
+    @ManagedProperty(value = "#{sesionBean}")
     private SesionBean sesion;
 
     public Author getAuthor() {

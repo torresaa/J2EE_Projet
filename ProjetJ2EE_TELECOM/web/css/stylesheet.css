@@ -42,7 +42,7 @@ h4{
 
 h5{
     font-family: 'lato', Arial,sans serif;
-    text-align:left;
+    text-align:end;
     font-size:10px;
     position:relative;
     margin-bottom:0px;
@@ -67,6 +67,19 @@ body{
     margin-right:auto;
 }
 
+.field{
+    font-family: 'lato', Arial,sans serif;
+    font-weight: bold;
+    text-align:right;
+    font-size:14px;
+}
+
+.valeu{
+    font-family: 'lato', Arial,sans serif;
+    font-weight: normal;
+    text-align:right;
+    font-size:14px;
+}
 
 /*atrubutos de header*/
 
@@ -108,6 +121,15 @@ section{
     border-top: 1px solid black;
 }
 
+.found{
+    width: inherit;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+}
+
 #bannerhorizontalsuperior{
     width:1024px;
     height:53px;
@@ -128,9 +150,14 @@ ul{
     border-bottom: 1px solid black;
 }
 
-li{
+#li_rigth{
     border-left: 1px solid black;
     float: right;
+}
+
+#li_left{
+    border-left: 1px solid black;
+    float: left;
 }
 
 ul li a{

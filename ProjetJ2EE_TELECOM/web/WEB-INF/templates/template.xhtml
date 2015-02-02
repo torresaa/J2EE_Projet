@@ -17,25 +17,49 @@
                 </div>
                 <div>
                     <ul id="menu">
-                        <li>
+                        <li id="li_rigth">
                             <h:link outcome="index">
                                 <h4>SEARCH</h4>
                             </h:link>
                         </li>
-                        <li>
-                            <h:link outcome="login">
-                                <h4>LOGIN</h4>
-                            </h:link>
-                        </li>
-                        <li>
-                            <h:link outcome="signup">
-                                <h4>SIGNUP</h4>
-                            </h:link>
-                        </li>
-                        <li>
-                            <a>
+
+                        <ui:fragment rendered="#{!sesionBean.loged}"> 
+                            <li id="li_left">
+                                <h:link outcome="login">
+                                    <h4>LOGIN</h4>
+                                </h:link>
+                            </li>
+                            <li id="li_left">
+                                <h:link outcome="signup">
+                                    <h4>SIGNUP</h4>
+                                </h:link>
+                            </li>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{sesionBean.loged}"> 
+                            <div id="li_left">
+                                <table>
+                                    <tr>
+                                        <td><h4>#{sesionBean.user.name}</h4></td> 
+                                        <td>
+                                            <ui:fragment rendered="#{sesionBean.admin}">
+                                                <h:link outcome="admin"> <h5>(admin)</h5> </h:link> 
+                                            </ui:fragment>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <li id="li_left">
+                                <h:link outcome="#{sesionBean.logOut()}">
+                                    <h4>Log out</h4>
+                                </h:link>
+                            </li>
+                        </ui:fragment>
+
+                        <li id="li_rigth">
+                            <h:link outcome="mychart">
                                 <h4>CHARRIOT</h4>
-                            </a>
+                            </h:link>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +70,7 @@
             </div>   
             <div id="footer" class="footer">
                 <h2>
-                    
+
                 </h2>
             </div>
         </f:view>    

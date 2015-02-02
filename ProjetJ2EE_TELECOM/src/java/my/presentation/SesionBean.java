@@ -5,8 +5,11 @@
  */
 package my.presentation;
 
+import descriptors.Product;
+import entities.Dvd;
 import entities.Users;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,15 +19,56 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "sesionBean")
 @SessionScoped
-public class SesionBean implements Serializable{
+public class SesionBean implements Serializable {
+
     private String header;
     private String toFind = "";
-    
-    private Users user;
-    private boolean login = false;
-    private boolean admin = false; 
-    
 
+    private Users user;
+    private boolean loged = false;
+    private boolean admin = false;
+    private List<Product> ordersList;
+    
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public boolean isLoged() {
+        return loged;
+    }
+
+    public void setLoged(boolean loged) {
+        this.loged = loged;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public List<Product> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Product> ordersList) {
+        this.ordersList = ordersList;
+    }
+
+    public void insertOrder(Dvd dvd) {
+        this.ordersList.add(new Product(dvd));
+    }
+
+    public void removeOder(Dvd dvd) {
+        this.ordersList.remove(dvd);
+    }
+    
     public String getToFind() {
         return toFind;
     }
@@ -41,15 +85,10 @@ public class SesionBean implements Serializable{
         this.header = header;
     }
     
-    public String goToIndex(){
+    public String logOut(){
+        this.user = null;
+        this.loged = false;
+        this.admin = false;
         return "index";
-    }
-    
-    public String goToSignin(){
-        return "signup";
-    }
-    
-    public String goToLogin(){
-        return "login";
     }
 }
