@@ -11,20 +11,22 @@ import boundary.DvdFacade;
 import entities.Author;
 import entities.Director;
 import entities.Dvd;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author User
  */
 @ManagedBean(name = "dvdView")
-@RequestScoped
-public class DvdView {
+@SessionScoped
+public class DvdView implements Serializable {
 
     @EJB
     private DirectorFacade directorFacade;
