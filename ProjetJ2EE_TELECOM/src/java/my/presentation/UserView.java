@@ -9,23 +9,34 @@ import boundary.UsersFacade;
 import entities.Users;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author User
  */
-@ManagedBean
+@ManagedBean(name = "#{userView}")
 @RequestScoped
 public class UserView {
     @EJB
     private UsersFacade usersFacade;
     private Users user;
+    @ManagedProperty(value = "#{OrdersView}")
+    private OrdersView OrdersView;
     /**
      * Creates a new instance of UserView
      */
     public UserView() {
-        this.user = new Users();
+        this.user = new Users();              
+    }
+
+    public OrdersView getOrdersView() {
+        return OrdersView;
+    }
+
+    public void setOrdersView(OrdersView OrdersView) {
+        this.OrdersView = OrdersView;
     }
 
     public Users getUser() {
@@ -51,11 +62,17 @@ public class UserView {
                 if (this.user == null){
                     return "";
                 }else{
-                    if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
-                            ||user.getUsername().equals("Omar")){
-                        return "admin";
+                    OrdersView.setLoged(true);
+                    OrdersView.setUser(user);
+                    if (!OrdersView.isFromOrders()){
+                        if (user.getUsername().equals("Jorge")||user.getUsername().equals("Aquiles")
+                                ||user.getUsername().equals("Omar")){
+                            return "admin";
+                        }else{
+                            return "client";
+                        }
                     }else{
-                        return "client";
+                        return "mychart";
                     }
                 }
             }else{

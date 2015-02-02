@@ -8,6 +8,7 @@ package my.presentation;
 import boundary.OrdersFacade;
 import entities.Dvd;
 import entities.Orders;
+import entities.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,10 @@ public class OrdersView implements Serializable {
     private Orders orders;
     private int quantity;
     private Dvd dvd;
-
+    private boolean loged = false;
+    private Users user;
+    private boolean fromOrders = false;
+    
     /**
      * Creates a new instance of OrdersView
      */
@@ -42,6 +46,30 @@ public class OrdersView implements Serializable {
         this.ordersList = new ArrayList<>();
     }
 
+    public boolean isFromOrders() {
+        return fromOrders;
+    }
+
+    public void setFromOrders(boolean fromOrders) {
+        this.fromOrders = fromOrders;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public boolean isLoged() {
+        return loged;
+    }
+
+    public void setLoged(boolean loged) {
+        this.loged = loged;
+    }    
+    
     public Dvd getDvd() {
         return this.dvd;
     }
@@ -74,12 +102,13 @@ public class OrdersView implements Serializable {
         this.orders = orders;
     }
 
-    public void insertOrder(Dvd dvd) {
-//        int q = this.quantity;
-//        dvd.setQuantity(q);
+    public String insertOrder(Dvd dvd) {
         this.ordersList.add(dvd);  
-//        return "";
-        //System.out.println("Dvd = " + dvd);
+        if (!loged){
+            fromOrders = true;
+            return "login";
+        }
+        return "";
     }
 
     public String editAction() {
@@ -100,7 +129,12 @@ public class OrdersView implements Serializable {
         if (this.ordersList.isEmpty()) {
             return "";
         } else {
-            return "mychart";
+            if (loged){
+                return "mychart";
+            }else{
+                fromOrders = true;
+                return "login";    
+            }
         }
     }
 }
