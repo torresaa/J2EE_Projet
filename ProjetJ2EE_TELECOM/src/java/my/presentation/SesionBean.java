@@ -9,6 +9,7 @@ import descriptors.Product;
 import entities.Dvd;
 import entities.Users;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -27,7 +28,7 @@ public class SesionBean implements Serializable {
     private Users user;
     private boolean loged = false;
     private boolean admin = false;
-    private List<Product> ordersList;
+    private List<Product> ordersList = new ArrayList<>();
     
     public Users getUser() {
         return user;
@@ -61,12 +62,14 @@ public class SesionBean implements Serializable {
         this.ordersList = ordersList;
     }
 
-    public void insertOrder(Dvd dvd) {
-        this.ordersList.add(new Product(dvd));
+    public String insertOrder(Dvd dvd) {
+        Product product = new Product(dvd);
+        this.ordersList.add(product);
+        return "found";
     }
 
-    public void removeOder(Product p) {
-        this.ordersList.remove(p);
+    public void removeOder(Dvd dvd) {
+        this.ordersList.remove(dvd);
     }
     
     public String getToFind() {
