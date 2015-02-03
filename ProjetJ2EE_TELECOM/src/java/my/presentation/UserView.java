@@ -67,22 +67,22 @@ public class UserView {
                 } else {
                     if (verifyUser.getUsername().equals("Jorge") || verifyUser.getUsername().equals("Aquiles")
                             || verifyUser.getUsername().equals("Omar")) {
-                        sesionBean.setLoged(true);
+                        sesionBean.setLogged(true);
                         sesionBean.setUser(verifyUser);
                         sesionBean.setAdmin(true);
                     } else {
-                        sesionBean.setLoged(true);
+                        sesionBean.setLogged(true);
                         sesionBean.setUser(verifyUser);
                     }
                 }
             } else {
                 if (user.getUsername().equals("Jorge") || user.getUsername().equals("Aquiles")
                         || user.getUsername().equals("Omar")) {
-                    sesionBean.setLoged(true);
+                    sesionBean.setLogged(true);
                     sesionBean.setUser(verifyUser);
                     sesionBean.setAdmin(true);
                 } else {
-                    sesionBean.setLoged(true);
+                    sesionBean.setLogged(true);
                     sesionBean.setUser(verifyUser);
                 }
             }

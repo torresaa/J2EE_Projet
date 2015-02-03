@@ -23,7 +23,7 @@
                             </h:link>
                         </li>
 
-                        <ui:fragment rendered="#{!sesionBean.loged}"> 
+                        <ui:fragment rendered="#{!sesionBean.logged}"> 
                             <li id="li_left">
                                 <h:link outcome="login">
                                     <h4>LOGIN</h4>
@@ -36,7 +36,7 @@
                             </li>
                         </ui:fragment>
 
-                        <ui:fragment rendered="#{sesionBean.loged}"> 
+                        <ui:fragment rendered="#{sesionBean.logged}"> 
                             <div id="li_left">
                                 <table>
                                     <tr>

@@ -49,9 +49,9 @@ public class OrdersView {
     }    
     
     public String payGestion(){
-        if (sesionBean.isLoged()){
+        if (sesionBean.isLogged()){
             for(int i = 0; i < sesionBean.getOrdersList().size(); i++){
-                Dvd dvd = new Dvd();
+                Dvd dvd;
                 dvd = dvdFacade.find(sesionBean.getOrdersList().get(i).getDvd().getIdDVDs());
                 if (dvd.getQuantity() < sesionBean.getOrdersList().get(i).getDvd().getQuantity()){
                     sesionBean.getOrdersList().get(i).setSetShippable(false);
@@ -59,7 +59,7 @@ public class OrdersView {
                     sesionBean.getOrdersList().get(i).setSetShippable(true);
                 }
             }
-            return "mychart_verified";
+            return "mychart_verify";
         }else{
             return "login";
         }

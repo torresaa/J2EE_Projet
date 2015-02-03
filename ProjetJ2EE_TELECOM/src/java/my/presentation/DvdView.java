@@ -25,8 +25,8 @@ import javax.faces.bean.SessionScoped;
  * @author User
  */
 @ManagedBean(name = "dvdView")
-@SessionScoped
-public class DvdView implements Serializable {
+@RequestScoped
+public class DvdView {
 
     @EJB
     private DirectorFacade directorFacade;
@@ -136,12 +136,12 @@ public class DvdView implements Serializable {
     }
 
     public String findDvd() {
-        this.dvdList = dvdFacade.findByName(sesion.getToFind());
-        if (this.dvdList.isEmpty()) {
-            this.dvdList = dvdFacade.findDvdByAuthor(sesion.getToFind());
-            if (this.dvdList.isEmpty()) {
-                this.dvdList = dvdFacade.findDvdByDirector(sesion.getToFind());
-                if (this.dvdList.isEmpty()) {
+        sesion.setDvdList(dvdFacade.findByName(sesion.getToFind()));        
+        if (sesion.getDvdList().isEmpty()){
+            sesion.setDvdList(dvdFacade.findDvdByAuthor(sesion.getToFind()));
+            if(sesion.getDvdList().isEmpty()){
+                sesion.setDvdList(dvdFacade.findDvdByDirector(sesion.getToFind()));
+                if (sesion.getDvdList().isEmpty()){
                     return "nothing";
                 } else {
                     return "found";

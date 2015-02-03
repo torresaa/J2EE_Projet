@@ -9,10 +9,11 @@
     <ui:define name="content">
         <div class="tituloSecciones">Result(s)</div>
         <h:form>
-            <ui:repeat value="#{dvdView.dvdList}" var="o">
+            <ui:repeat value="#{sesionBean.dvdList}" var="o">
+            <!--<ui:repeat value="dvdView.dvdList" var="o">-->
                 #{o.setQuantity(1)}
                 <div class="found">
-                    <h:form>
+                    <!--<h:form>-->
                         <table style="width: inherit">
                             <tr>
                                 <td style="width: 100px; height: 100px">
@@ -83,7 +84,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </h:form>
+                    <!--</h:form>-->
                 </div>            
             </ui:repeat>
         </h:form>

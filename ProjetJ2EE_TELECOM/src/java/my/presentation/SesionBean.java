@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
 /**
  *
  * @author aquilest
@@ -26,10 +27,19 @@ public class SesionBean implements Serializable {
     private String toFind = "";
 
     private Users user;
-    private boolean loged = false;
+    private boolean logged = false;
     private boolean admin = false;
     private List<Product> ordersList = new ArrayList<>();
-    
+    private List<Dvd> dvdList = new ArrayList<>();
+
+    public List<Dvd> getDvdList() {
+        return dvdList;
+    }
+
+    public void setDvdList(List<Dvd> dvdList) {
+        this.dvdList = dvdList;
+    }
+            
     public Users getUser() {
         return user;
     }
@@ -38,12 +48,12 @@ public class SesionBean implements Serializable {
         this.user = user;
     }
 
-    public boolean isLoged() {
-        return loged;
+    public boolean isLogged() {
+        return logged;
     }
 
-    public void setLoged(boolean loged) {
-        this.loged = loged;
+    public void setLogged(boolean loged) {
+        this.logged = loged;
     }
 
     public boolean isAdmin() {
@@ -68,7 +78,7 @@ public class SesionBean implements Serializable {
         return "found";
     }
 
-    public void removeOder(Dvd dvd) {
+    public void removeOder(Product dvd) {        
         this.ordersList.remove(dvd);
     }
     
@@ -90,7 +100,7 @@ public class SesionBean implements Serializable {
     
     public String logOut(){
         this.user = null;
-        this.loged = false;
+        this.logged = false;
         this.admin = false;
         return "index";
     }

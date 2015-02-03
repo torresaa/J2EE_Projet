@@ -85,7 +85,7 @@
         <ui:fragment rendered="#{sesionBean.ordersList.size()>0}">
             <div class="footer" style="text-align: center">
                 <h:form>
-                    <h:commandButton action="paypage" value="Pay !" class="actionBtn">
+                    <h:commandButton action="#{ordersView.payGestion()}" value="Pay !" class="actionBtn">
                     </h:commandButton>
                 </h:form>
             </div>
