@@ -7,81 +7,86 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
-        <ui:repeat value="#{dvdView.dvdList}" var="o">
-            <div class="found">
-                <h:form>
-                    <table style="width: inherit">
-                        <tr>
-                            <td style="width: 100px; height: 100px">
-                                <!--                            Here is for future picture-->
-                            </td>
-                            <td style="width: available">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Title:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.dvdTitle}
-                                            </a>
-                                        </td>
-                                    </tr>
+        <div class="tituloSecciones">Result(s)</div>
+        <h:form>
+            <ui:repeat value="#{dvdView.dvdList}" var="o">
+                #{o.setQuantity(1)}
+                <div class="found">
+                    <h:form>
+                        <table style="width: inherit">
+                            <tr>
+                                <td style="width: 100px; height: 100px">
+                                    <!--                            Here is for future picture-->
+                                </td>
+                                <td style="width: available">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a class="field">
+                                                    Title:
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="valeu">
+                                                    #{o.dvdTitle}
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Author:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.authoridAuthor.authorName}
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="field">
+                                                    Author:
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="valeu">
+                                                    #{o.authoridAuthor.authorName}
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Director:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.directoridDirector.directorName}
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="field">
+                                                    Director:
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="valeu">
+                                                    #{o.directoridDirector.directorName}
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                                    <tr style="height: 10px"></tr>
-                                </table>
-                            </td>
-                            <td style="width: 50px"></td>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a class="valeu">
-                                                Quantity:
-                                            </a>
-                                            <h:inputText maxlength="3" size="3" value="#{o.quantity = 1}" />
-                                        </td>
-                                        <td>
-                                            <h:commandButton value="Add"
-                                                             action="#{sesionBean.insertOrder(o)}" >
-                                            </h:commandButton>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </h:form>
-            </div>            
-        </ui:repeat>
+                                        <tr style="height: 10px"></tr>
+                                    </table>
+                                </td>
+                                <td style="width: 50px"></td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a class="valeu">
+                                                    Quantity:
+                                                </a>
+                                                <h:inputText maxlength="3" size="3" value="#{o.quantity}">
+                                                </h:inputText>
+                                            </td>
+                                            <td>
+                                                <h:commandButton value="Add"
+                                                                 action="#{sesionBean.insertOrder(o)}" >
+                                                </h:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </h:form>
+                </div>            
+            </ui:repeat>
+        </h:form>
     </ui:define>
 </ui:composition>
 

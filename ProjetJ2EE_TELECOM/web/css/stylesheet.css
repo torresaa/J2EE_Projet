@@ -61,8 +61,11 @@ body{
     background-color:rgb(255,255,255);
 }
 .tituloSecciones{
+    font-family: 'lato', Arial,sans serif;
+    text-align:left;
+    font-size:30px;
     width:994px;
-    height:20px;	
+    height:50px;	
     margin-left:auto;
     margin-right:auto;
 }
@@ -109,7 +112,8 @@ section{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    border-top: 1px solid black;
+    margin-bottom: 10px;
+    border-top: 3px solid black;
 }
 
 .result{
@@ -122,6 +126,26 @@ section{
 }
 
 .found{
+    width: inherit;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+}
+
+.shippeable{
+    background: rgba(0,190,0,0.2);
+    width: inherit;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+}
+
+.notShippeable{
+    background: rgba(210,0,0,0.2);
     width: inherit;
     height: fit-content;
     margin-left: auto;
@@ -147,7 +171,7 @@ ul{
     list-style:none;
     list-style-type: none;
     background-color:yellow;
-    border-bottom: 1px solid black;
+/*    border-bottom: 1px solid black;*/
 }
 
 #li_rigth{
@@ -165,6 +189,13 @@ ul li a{
     float: none;
     width: 100px;
     text-align: center;
+}
+
+.actionBtn{
+    height: fit-content;
+    font-family: 'lato', Arial,sans serif;
+    text-align:left;
+    font-size:30px;
 }
 
 
