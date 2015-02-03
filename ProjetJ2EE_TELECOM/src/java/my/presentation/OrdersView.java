@@ -5,11 +5,15 @@
  */
 package my.presentation;
 
+import boundary.DvdFacade;
 import boundary.OrdersFacade;
+import entities.Dvd;
 import entities.Orders;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -17,13 +21,17 @@ import javax.faces.bean.SessionScoped;
  * @author User
  */
 @ManagedBean(name = "ordersView")
-@SessionScoped
-public class OrdersView implements Serializable {
+@RequestScoped
+public class OrdersView {
 
     private static final long serialVersionUID = 1L;
     @EJB
     private OrdersFacade ordersFacade;
+    @EJB
+    private DvdFacade dvdFacade;    
     private Orders orders;
+    @ManagedProperty(value = "#{sesionBean}")
+    private SesionBean sesionBean;
     
     /**
      * Creates a new instance of OrdersView
@@ -31,4 +39,45 @@ public class OrdersView implements Serializable {
     public OrdersView() {
         this.orders = new Orders();
     }    
+    
+    public SesionBean getSesionBean() {
+        return sesionBean;
+    }
+
+    public void setSesionBean(SesionBean sesionBean) {
+        this.sesionBean = sesionBean;
+    }    
+    
+    public String payGestion(){
+        if (sesionBean.isLoged()){
+            for(int i = 0; i < sesionBean.getOrdersList().size(); i++){
+                Dvd dvd = new Dvd();
+                dvd = dvdFacade.find(sesionBean.getOrdersList().get(i).getDvd().getIdDVDs());
+                if (dvd.getQuantity() < sesionBean.getOrdersList().get(i).getDvd().getQuantity()){
+                    sesionBean.getOrdersList().get(i).setSetShippable(false);
+                }else{
+                    sesionBean.getOrdersList().get(i).setSetShippable(true);
+                }
+            }
+            return "mychart_verified";
+        }else{
+            return "login";
+        }
+    }
+    
+    public String postOrders(){
+        for (int i = 0; i < sesionBean.getOrdersList().size(); i++){
+            Orders order = new Orders();
+            order.setDvdidDVDs(sesionBean.getOrdersList().get(i).getDvd());
+            order.setUseridUser(sesionBean.getUser());
+            if(sesionBean.getOrdersList().get(i).isShippable()){
+                order.setStatus("En cours");
+            }else{
+                order.setStatus("En attente");
+            }              
+            ordersFacade.create(order);
+        }
+        return "TODO";
+    }
+    
 }

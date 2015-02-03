@@ -6,7 +6,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -37,7 +36,17 @@ public class Dvd implements Serializable {
     @JoinColumn(name = "Director_idDirector", referencedColumnName = "idDirector")
     @ManyToOne(optional = false)    
     private Director directoridDirector;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dvdidDVDs")
+    private List<Orders> ordersList;
 
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }    
+    
     public Integer getQuantity() {
         return quantity;
     }

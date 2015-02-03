@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,20 +22,51 @@ public class Orders implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer idOrder;
+    private String status;
+    @JoinColumn(name = "Dvd_idDVDs", referencedColumnName = "idDVDs")
+    @ManyToOne(optional = false)
+    private Dvd dvdidDVDs;
+    @JoinColumn(name = "Users_idUser", referencedColumnName = "idUser")
+    @ManyToOne(optional = false)    
+    private Users useridUser;    
 
-    public Integer getId() {
-        return id;
+    public Integer getIdOrder() {
+        return idOrder;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdOrder(Integer idOrder) {
+        this.idOrder = idOrder;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Dvd getDvdidDVDs() {
+        return dvdidDVDs;
+    }
+
+    public void setDvdidDVDs(Dvd dvdidDVDs) {
+        this.dvdidDVDs = dvdidDVDs;
+    }
+
+    public Users getUseridUser() {
+        return useridUser;
+    }
+
+    public void setUseridUser(Users useridUser) {
+        this.useridUser = useridUser;
+    }
+         
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idOrder != null ? idOrder.hashCode() : 0);
         return hash;
     }
 
@@ -44,7 +77,7 @@ public class Orders implements Serializable {
             return false;
         }
         Orders other = (Orders) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idOrder == null && other.idOrder != null) || (this.idOrder != null && !this.idOrder.equals(other.idOrder))) {
             return false;
         }
         return true;
@@ -52,7 +85,7 @@ public class Orders implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Orders[ id=" + id + " ]";
+        return "entities.Orders[ id=" + idOrder + " ]";
     }
     
 }
