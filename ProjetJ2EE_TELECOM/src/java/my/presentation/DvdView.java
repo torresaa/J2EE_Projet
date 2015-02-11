@@ -98,6 +98,8 @@ public class DvdView {
      */
     public DvdView() {
         this.dvd = new Dvd();
+        this.dvd.setQuantity(0);
+        this.dvd.setDvdTitle("");
         this.author = new Author();
         this.director = new Director();
     }
