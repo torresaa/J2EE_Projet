@@ -37,9 +37,9 @@ public class SesionBean implements Serializable {
     private boolean logged;
     private boolean admin;
     private boolean chartVerified;
-    private List<Product> ordersList = new ArrayList<>();
-    private List<Dvd> dvdList = new ArrayList<>();
-    private List<Orders> adminOrdersList = new ArrayList<>();
+    private List<Product> chartList = new ArrayList<>();
+    private List<Dvd> dvdList = new ArrayList<>();   
+    private List<Orders> ordersList = new ArrayList<>();
     private int creditCardNumber = 0;
     private String creditCardExpirationDate = "";
     private int creditCardCode = 0;
@@ -50,6 +50,14 @@ public class SesionBean implements Serializable {
         this.admin = false;
         this.chartVerified = false;
     }    
+
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }
 
     public int getCreditCardNumber() {
         return creditCardNumber;
@@ -115,22 +123,22 @@ public class SesionBean implements Serializable {
         this.admin = admin;
     }
 
-    public List<Product> getOrdersList() {
-        return ordersList;
+    public List<Product> getChartList() {
+        return chartList;
     }
 
-    public void setOrdersList(List<Product> ordersList) {
-        this.ordersList = ordersList;
+    public void setChartList(List<Product> chartList) {
+        this.chartList = chartList;
     }
 
     public String insertOrder(Dvd dvd) {       
         Product product = new Product(dvd);
-        this.ordersList.add(product);
+        this.chartList.add(product);
         return "found";
     }
 
     public void removeOder(Product dvd) {        
-        this.ordersList.remove(dvd);
+        this.chartList.remove(dvd);
     }
     
     public String getToFind() {
@@ -154,26 +162,34 @@ public class SesionBean implements Serializable {
         this.logged = false;
         this.admin = false;
         this.chartVerified = false;
+        this.chartList = null;
+        this.dvdList = null;
         this.ordersList = null;
         return "index";
     }
     
-    public String adminChart(){
-        this.adminOrdersList = this.ordersFacade.getOrdersForAdmin();
-        return "todo";//HAY QUE HACER PAG PA LISTA DEL ADMIN 
+    public String displayStock(){
+        this.dvdList = dvdFacade.findAll();
+        return "stock_list";
+        //HAY QUE HACER PAG PA LISTA DEL ADMIN 
+    }    
+    
+    public String updateDvd(Dvd dvd){
+        dvdFacade.updateDvdAdd(dvd);
+        return "stock_list";
     }
     
     public String chartOption(){
 
             if (this.logged){
-               if (!this.ordersList.isEmpty() && this.chartVerified){
-                    for(int i = 0; i < this.ordersList.size(); i++){
+               if (!this.chartList.isEmpty() && this.chartVerified){
+                    for(int i = 0; i < this.chartList.size(); i++){
                         Dvd dvd;
-                        dvd = dvdFacade.find(this.ordersList.get(i).getDvd().getIdDVDs());
-                        if (dvd.getQuantity() < this.ordersList.get(i).getDvd().getQuantity()){
-                            this.ordersList.get(i).setSetShippable(false);
+                        dvd = dvdFacade.find(this.chartList.get(i).getDvd().getIdDVDs());
+                        if (dvd.getQuantity() < this.chartList.get(i).getDvd().getQuantity()){
+                            this.chartList.get(i).setSetShippable(false);
                         }else{
-                            this.ordersList.get(i).setSetShippable(true);
+                            this.chartList.get(i).setSetShippable(true);
                         }
                     }
                     this.chartVerified = true;
@@ -186,5 +202,9 @@ public class SesionBean implements Serializable {
             }
         
     }
-                    
+    
+    public void setIndexAdmin(){
+        this.ordersList = null;
+        this.ordersList = ordersFacade.getOrdersEnAttente();
+    }
 }

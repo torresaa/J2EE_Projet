@@ -89,6 +89,9 @@ public class UserView {
         } else {
             return "login_wrong";
         }
+        if (sesion.isAdmin()){
+            this.sesion.setIndexAdmin();
+        }
         return "index";
     }
 }

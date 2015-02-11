@@ -36,8 +36,8 @@ public class DvdFacade extends AbstractFacade<Dvd> {
 
     public List<Dvd> findByName(String name) {
         List<Dvd> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT d FROM Dvd d WHERE d.dvdTitle= :name").
-                setParameter("name", name);
+        Query q = em.createQuery("SELECT d FROM Dvd d WHERE d.dvdTitle LIKE :name").
+                setParameter("name", "%"+name+"%");
 //        try{
 //            q.getSingleResult();
 //        }catch (NoResultException e1){
@@ -52,9 +52,9 @@ public class DvdFacade extends AbstractFacade<Dvd> {
 
     public List<Dvd> findDvdByAuthor(String name) {
         List<Dvd> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT d FROM Dvd d, Author a WHERE a.authorName= :name"
+        Query q = em.createQuery("SELECT d FROM Dvd d, Author a WHERE a.authorName LIKE :name"
                 + " AND a.idAuthor= d.authoridAuthor.idAuthor").
-                setParameter("name", name);
+                setParameter("name", "%"+name+"%");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -69,9 +69,9 @@ public class DvdFacade extends AbstractFacade<Dvd> {
 
     public List<Dvd> findDvdByDirector(String name) {
         List<Dvd> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT d FROM Dvd d, Director di WHERE di.directorName=:name "
+        Query q = em.createQuery("SELECT d FROM Dvd d, Director di WHERE di.directorName LIKE :name "
                 + "AND di.idDirector = d.directoridDirector.idDirector").
-                setParameter("name", name);
+                setParameter("name", "%"+name+"%");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -82,5 +82,15 @@ public class DvdFacade extends AbstractFacade<Dvd> {
         }
         list = q.getResultList();
         return list;
+    }
+    
+    public void updateDvdAdd(Dvd dvd){
+        Query q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity + :quantity WHERE d.idDVDs = :id")
+                .setParameter("quantity", dvd.getQuantity()).setParameter("id", dvd.getIdDVDs());
+    }
+    
+    public void updateDvdSubstract(Dvd dvd){
+        Query q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity - :quantity WHERE d.idDVDs = :id")
+                .setParameter("quantity", dvd.getQuantity()).setParameter("id", dvd.getIdDVDs());
     }
 }
