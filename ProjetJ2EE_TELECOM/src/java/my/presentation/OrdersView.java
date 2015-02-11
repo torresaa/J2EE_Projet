@@ -31,7 +31,7 @@ public class OrdersView {
     private DvdFacade dvdFacade;    
     private Orders orders;
     @ManagedProperty(value = "#{sesionBean}")
-    private SesionBean sesionBean;
+    private SesionBean sesion;
     
     /**
      * Creates a new instance of OrdersView
@@ -40,25 +40,26 @@ public class OrdersView {
         this.orders = new Orders();
     }    
     
-    public SesionBean getSesionBean() {
-        return sesionBean;
+    public SesionBean getSesion() {
+        return sesion;
     }
 
-    public void setSesionBean(SesionBean sesionBean) {
-        this.sesionBean = sesionBean;
+    public void setSesion(SesionBean sesion) {
+        this.sesion = sesion;
     }    
     
     public String payGestion(){
-        if (sesionBean.isLogged()){
-            for(int i = 0; i < sesionBean.getOrdersList().size(); i++){
+        if (sesion.isLogged()){
+            for(int i = 0; i < sesion.getOrdersList().size(); i++){
                 Dvd dvd;
-                dvd = dvdFacade.find(sesionBean.getOrdersList().get(i).getDvd().getIdDVDs());
-                if (dvd.getQuantity() < sesionBean.getOrdersList().get(i).getDvd().getQuantity()){
-                    sesionBean.getOrdersList().get(i).setSetShippable(false);
+                dvd = dvdFacade.find(sesion.getOrdersList().get(i).getDvd().getIdDVDs());
+                if (dvd.getQuantity() < sesion.getOrdersList().get(i).getDvd().getQuantity()){
+                    sesion.getOrdersList().get(i).setSetShippable(false);
                 }else{
-                    sesionBean.getOrdersList().get(i).setSetShippable(true);
+                    sesion.getOrdersList().get(i).setSetShippable(true);
                 }
             }
+            sesion.setChartVerified(true);
             return "mychart_verify";
         }else{
             return "login";
@@ -66,18 +67,24 @@ public class OrdersView {
     }
     
     public String postOrders(){
-        for (int i = 0; i < sesionBean.getOrdersList().size(); i++){
-            Orders order = new Orders();
-            order.setDvdidDVDs(sesionBean.getOrdersList().get(i).getDvd());
-            order.setUseridUser(sesionBean.getUser());
-            if(sesionBean.getOrdersList().get(i).isShippable()){
-                order.setStatus("En cours");
-            }else{
-                order.setStatus("En attente");
-            }              
-            ordersFacade.create(order);
-        }
-        return "TODO";
+        if (sesion.getCreditCardCode() == 0 || sesion.getCreditCardNumber() == 0 
+                || sesion.getCreditCardExpirationDate().equals("")){
+            return "paypage_wrong";
+        }else{
+            for (int i = 0; i < sesion.getOrdersList().size(); i++){
+                Orders order = new Orders();
+                order.setDvdidDVDs(sesion.getOrdersList().get(i).getDvd());
+                order.setUsersidUser(sesion.getUser());
+                if(sesion.getOrdersList().get(i).isShippable()){
+                    order.setStatus("En cours");
+                }else{
+                    order.setStatus("En attente");
+                } 
+                order.setQuantity(sesion.getOrdersList().get(i).getDvd().getQuantity());
+                ordersFacade.create(order);
+            }
+            return "index_afterpay";
+        }        
     }
     
 }

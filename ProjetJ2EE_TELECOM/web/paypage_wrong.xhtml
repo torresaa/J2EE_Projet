@@ -7,10 +7,15 @@
 
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="Credit card number:"/><h:inputText value="#{sesionBean.creditCardNumber}"/><br/>
-            <h:outputLabel value="Expiration date:"/><h:inputText value="#{sesionBean.creditCardExpirationDate}"/><br/>
-            <h:outputLabel value="Secret Code:"/><h:inputText value="#{sesionBean.creditCardCode}"/><br/>
+            <h:outputLabel value="Credit card number:"/><h:inputText value="#{sesionBean.toFind}"/><br/>
+            <h:outputLabel value="Expiration date:"/><h:inputText value="#{sesionBean.toFind}"/><br/>
+            <h:outputLabel value="Secret Code:"/><h:inputText value="#{sesionBean.toFind}"/><br/>
             <h:commandButton action="#{ordersView.postOrders()}" value="Go!"/><br/><br/>                
-        </h:form> 
+        </h:form>
+        <div class="result">
+            <h2 style="color: red">
+                Please enter valid value(s).
+            </h2>
+        </div>        
     </ui:define>
 </ui:composition>

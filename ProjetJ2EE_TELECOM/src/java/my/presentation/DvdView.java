@@ -136,6 +136,7 @@ public class DvdView {
     }
 
     public String findDvd() {
+        List<Integer> list = new ArrayList<>();
         sesion.setDvdList(dvdFacade.findByName(sesion.getToFind()));        
         if (sesion.getDvdList().isEmpty()){
             sesion.setDvdList(dvdFacade.findDvdByAuthor(sesion.getToFind()));
@@ -144,12 +145,21 @@ public class DvdView {
                 if (sesion.getDvdList().isEmpty()){
                     return "nothing";
                 } else {
+                    for(int i = 0; i < sesion.getDvdList().size(); i++){
+                        sesion.getDvdList().get(i).setQuantity(1);
+                    }           
                     return "found";
                 }
             } else {
+                for(int i = 0; i < sesion.getDvdList().size(); i++){
+                    sesion.getDvdList().get(i).setQuantity(1);
+                }
                 return "found";
             }
         } else {
+            for(int i = 0; i < sesion.getDvdList().size(); i++){
+                sesion.getDvdList().get(i).setQuantity(1);
+            }
             return "found";
         }
     }

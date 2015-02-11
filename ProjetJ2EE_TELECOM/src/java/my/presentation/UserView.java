@@ -24,7 +24,7 @@ public class UserView {
     private UsersFacade usersFacade;
     private Users user;
     @ManagedProperty(value = "#{sesionBean}")
-    private SesionBean sesionBean;
+    private SesionBean sesion;
 
     /**
      * Creates a new instance of UserView
@@ -33,12 +33,12 @@ public class UserView {
         this.user = new Users();
     }
 
-    public SesionBean getSesionBean() {
-        return sesionBean;
+    public SesionBean getSesion() {
+        return sesion;
     }
 
-    public void setSesionBean(SesionBean sesionBean) {
-        this.sesionBean = sesionBean;
+    public void setSesion(SesionBean sesion) {
+        this.sesion = sesion;
     }
 
     public Users getUser() {
@@ -58,7 +58,7 @@ public class UserView {
 
     public String login() {
         if (this.user.getUsername() != null && this.user.getPassword() != null) {
-            Users verifyUser = new Users();
+            Users verifyUser;
             verifyUser = this.usersFacade.findUser(user.getUsername(), user.getPassword());
             if (verifyUser == null) {
                 verifyUser = this.usersFacade.findUserByEmail(user.getUsername(), user.getPassword());
@@ -67,23 +67,23 @@ public class UserView {
                 } else {
                     if (verifyUser.getUsername().equals("Jorge") || verifyUser.getUsername().equals("Aquiles")
                             || verifyUser.getUsername().equals("Omar")) {
-                        sesionBean.setLogged(true);
-                        sesionBean.setUser(verifyUser);
-                        sesionBean.setAdmin(true);
+                        sesion.setLogged(true);
+                        sesion.setUser(verifyUser);
+                        sesion.setAdmin(true);
                     } else {
-                        sesionBean.setLogged(true);
-                        sesionBean.setUser(verifyUser);
+                        sesion.setLogged(true);
+                        sesion.setUser(verifyUser);
                     }
                 }
             } else {
                 if (user.getUsername().equals("Jorge") || user.getUsername().equals("Aquiles")
                         || user.getUsername().equals("Omar")) {
-                    sesionBean.setLogged(true);
-                    sesionBean.setUser(verifyUser);
-                    sesionBean.setAdmin(true);
+                    sesion.setLogged(true);
+                    sesion.setUser(verifyUser);
+                    sesion.setAdmin(true);
                 } else {
-                    sesionBean.setLogged(true);
-                    sesionBean.setUser(verifyUser);
+                    sesion.setLogged(true);
+                    sesion.setUser(verifyUser);
                 }
             }
         } else {

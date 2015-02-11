@@ -5,12 +5,14 @@
  */
 package my.presentation;
 
+import boundary.DvdFacade;
 import descriptors.Product;
 import entities.Dvd;
 import entities.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,16 +24,61 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sesionBean")
 @SessionScoped
 public class SesionBean implements Serializable {
-
+    
+    @EJB
+    private DvdFacade dvdFacade;    
     private String header;
     private String toFind = "";
 
     private Users user;
-    private boolean logged = false;
-    private boolean admin = false;
+    private boolean logged;
+    private boolean admin;
+    private boolean chartVerified;
     private List<Product> ordersList = new ArrayList<>();
     private List<Dvd> dvdList = new ArrayList<>();
+    private int creditCardNumber = 0;
+    private String creditCardExpirationDate = "";
+    private int creditCardCode = 0;
 
+    public SesionBean() {
+        this.user = new Users();
+        this.logged = false;
+        this.admin = false;
+        this.chartVerified = false;
+    }    
+
+    public int getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(int creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public String getCreditCardExpirationDate() {
+        return creditCardExpirationDate;
+    }
+
+    public void setCreditCardExpirationDate(String creditCardExpirationDate) {
+        this.creditCardExpirationDate = creditCardExpirationDate;
+    }
+
+    public int getCreditCardCode() {
+        return creditCardCode;
+    }
+
+    public void setCreditCardCode(int creditCardCode) {
+        this.creditCardCode = creditCardCode;
+    }
+
+    public boolean isChartVerified() {
+        return chartVerified;
+    }
+
+    public void setChartVerified(boolean chartVerified) {
+        this.chartVerified = chartVerified;
+    }
+        
     public List<Dvd> getDvdList() {
         return dvdList;
     }
@@ -72,7 +119,7 @@ public class SesionBean implements Serializable {
         this.ordersList = ordersList;
     }
 
-    public String insertOrder(Dvd dvd) {
+    public String insertOrder(Dvd dvd) {       
         Product product = new Product(dvd);
         this.ordersList.add(product);
         return "found";
@@ -102,6 +149,30 @@ public class SesionBean implements Serializable {
         this.user = null;
         this.logged = false;
         this.admin = false;
+        this.chartVerified = false;
         return "index";
     }
+    
+    public String chartOption(){
+        if (this.logged){
+            if (!this.ordersList.isEmpty() && this.chartVerified){
+                for(int i = 0; i < this.ordersList.size(); i++){
+                    Dvd dvd;
+                    dvd = dvdFacade.find(this.ordersList.get(i).getDvd().getIdDVDs());
+                    if (dvd.getQuantity() < this.ordersList.get(i).getDvd().getQuantity()){
+                        this.ordersList.get(i).setSetShippable(false);
+                    }else{
+                        this.ordersList.get(i).setSetShippable(true);
+                    }
+                }
+                this.chartVerified = true;
+                return "mychart_verify";
+            }else{
+                return "mychart";
+            }
+        }else{
+            return "mychart";
+        }
+    }
+                    
 }

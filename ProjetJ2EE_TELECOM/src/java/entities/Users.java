@@ -34,7 +34,7 @@ public class Users implements Serializable {
     private String username;
     private String password;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "useridUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersidUser")
     private List<Orders> ordersList;
 
     public List<Orders> getOrdersList() {

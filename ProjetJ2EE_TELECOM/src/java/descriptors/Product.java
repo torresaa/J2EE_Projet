@@ -14,6 +14,10 @@ import entities.Dvd;
 public class Product {
     private Dvd dvd;
     private boolean isShippable = false;
+
+    public void setDvd(Dvd dvd) {
+        this.dvd = dvd;
+    }
     
     public Product(Dvd dvd){
         this.dvd = dvd;

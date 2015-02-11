@@ -21,15 +21,16 @@ import javax.persistence.ManyToOne;
 public class Orders implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrder;
     private String status;
+    private int quantity;
     @JoinColumn(name = "Dvd_idDVDs", referencedColumnName = "idDVDs")
     @ManyToOne(optional = false)
     private Dvd dvdidDVDs;
     @JoinColumn(name = "Users_idUser", referencedColumnName = "idUser")
     @ManyToOne(optional = false)    
-    private Users useridUser;    
+    private Users usersidUser;    
 
     public Integer getIdOrder() {
         return idOrder;
@@ -47,6 +48,14 @@ public class Orders implements Serializable {
         this.status = status;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Dvd getDvdidDVDs() {
         return dvdidDVDs;
     }
@@ -55,12 +64,12 @@ public class Orders implements Serializable {
         this.dvdidDVDs = dvdidDVDs;
     }
 
-    public Users getUseridUser() {
-        return useridUser;
+    public Users getUsersidUser() {
+        return usersidUser;
     }
 
-    public void setUseridUser(Users useridUser) {
-        this.useridUser = useridUser;
+    public void setUsersidUser(Users usersidUser) {
+        this.usersidUser = usersidUser;
     }
          
     @Override

@@ -50,14 +50,16 @@
                                 </table>
                             </div>
                             <li id="li_left">
-                                <h:link outcome="#{sesionBean.logOut()}">
-                                    <h4>Log out</h4>
-                                </h:link>
+                                <h:form>
+                                    <h:commandLink action="#{sesionBean.logOut()}">
+                                        <h4>Log out</h4>
+                                    </h:commandLink>
+                                </h:form>
                             </li>
                         </ui:fragment>
 
                         <li id="li_rigth">
-                            <h:link outcome="mychart">
+                            <h:link outcome="#{sesionBean.chartOption()}"><!--<h:link outcome="mychart">-->
                                 <h4>CHART</h4>
                             </h:link>
                         </li>

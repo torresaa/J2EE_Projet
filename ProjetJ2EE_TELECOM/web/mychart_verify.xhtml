@@ -9,100 +9,175 @@
         <div class="tituloSecciones">My Chart</div>
         <ui:repeat value="#{sesionBean.ordersList}" var="o">
             <ui:fragment rendered="#{o.shippable}"> 
-                <div class="shippeable"> 
+                <div class="shippeable">
+                    <ui:insert name="info">
+                        <h:form>
+                            <table style="width: inherit">
+                                <tr>
+                                    <td style="width: 100px; height: 100px">
+                                        <!--                            Here is for future picture-->
+                                    </td>
+                                    <td style="width: available">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Title:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.dvdTitle}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Author:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.authoridAuthor.authorName}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Director:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.directoridDirector.directorName}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr style="height: 10px"></tr>
+                                        </table>
+                                    </td>
+                                    <td style="width: 50px"></td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class="valeu">
+                                                        Quantity:
+                                                    </a>
+                                                    <h:outputLabel value="#{o.dvd.quantity}" />
+                                                </td>
+                                                <td>
+                                                    <h:commandButton value="Remove"
+                                                                     action="#{sesionBean.removeOder(o)}" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:form>
+                    </ui:insert>
+                </div>
             </ui:fragment> 
-            
+
             <ui:fragment rendered="#{!o.shippable}"> 
-                <div class="notShippeable"> 
+                <div class="notShippeable">
+                    <ui:insert name="info">
+                        <h:form>
+                            <table style="width: inherit">
+                                <tr>
+                                    <td style="width: 100px; height: 100px">
+                                        <!--                            Here is for future picture-->
+                                    </td>
+                                    <td style="width: available">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Title:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.dvdTitle}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Author:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.authoridAuthor.authorName}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <a class="field">
+                                                        Director:
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="valeu">
+                                                        #{o.dvd.directoridDirector.directorName}
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr style="height: 10px"></tr>
+                                        </table>
+                                    </td>
+                                    <td style="width: 50px"></td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class="valeu">
+                                                        Quantity:
+                                                    </a>
+                                                    <h:outputLabel value="#{o.dvd.quantity}" />
+                                                </td>
+                                                <td>
+                                                    <h:commandButton value="Remove"
+                                                                     action="#{sesionBean.removeOder(o)}" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:form>
+                    </ui:insert>
+                </div>
             </ui:fragment>
-                <h:form>
-                    <table style="width: inherit">
-                        <tr>
-                            <td style="width: 100px; height: 100px">
-                                <!--                            Here is for future picture-->
-                            </td>
-                            <td style="width: available">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Title:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.dvd.dvdTitle}
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Author:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.dvd.authoridAuthor.authorName}
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <a class="field">
-                                                Director:
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="valeu">
-                                                #{o.dvd.directoridDirector.directorName}
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr style="height: 10px"></tr>
-                                </table>
-                            </td>
-                            <td style="width: 50px"></td>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a class="valeu">
-                                                Quantity:
-                                            </a>
-                                            <h:outputLabel value="#{o.dvd.quantity = 1}" />
-                                        </td>
-                                        <td>
-                                            <h:commandButton value="Remove"
-                                                             action="#{sesionBean.removeOder(o)}" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </h:form>
-            </div>            
         </ui:repeat>
-
+       
         <ui:fragment rendered="#{sesionBean.ordersList.size()>0}">
+            <div class="result">
+                <h4 style="display: inline">
+                    The order(s) on <class style="color: red; display: inline"> RED </class> can not be shippeable now.
+                    If you want to continue, this order(s) will be waiting stock.   
+                </h4>
+            </div>
             <div class="footer" style="text-align: center">
+                
                 <h:form>
-                    <h:commandButton action="paypage" value="Pay !" class="actionBtn">
+                    <h:commandButton action="paypage" value="Continue" class="actionBtn">
                     </h:commandButton>
                 </h:form>
             </div>
         </ui:fragment>
-        
-        <ui:fragment rendered="#{sesionBean.ordersList.size()==0}">
-            <div class="result">
-                <h3 style="text-align: center">Empty chart.</h3>
-                <h2 style="text-align: center; font-size: 30px">Buy something !</h2>
-            </div>
-        </ui:fragment>
-        
+
     </ui:define>
 </ui:composition>
