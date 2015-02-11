@@ -6,8 +6,10 @@
 package my.presentation;
 
 import boundary.DvdFacade;
+import boundary.OrdersFacade;
 import descriptors.Product;
 import entities.Dvd;
+import entities.Orders;
 import entities.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,9 +26,10 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sesionBean")
 @SessionScoped
 public class SesionBean implements Serializable {
-    
     @EJB
-    private DvdFacade dvdFacade;    
+    private OrdersFacade ordersFacade;    
+    @EJB
+    private DvdFacade dvdFacade;      
     private String header;
     private String toFind = "";
 
@@ -36,6 +39,7 @@ public class SesionBean implements Serializable {
     private boolean chartVerified;
     private List<Product> ordersList = new ArrayList<>();
     private List<Dvd> dvdList = new ArrayList<>();
+    private List<Orders> adminOrdersList = new ArrayList<>();
     private int creditCardNumber = 0;
     private String creditCardExpirationDate = "";
     private int creditCardCode = 0;
@@ -150,29 +154,37 @@ public class SesionBean implements Serializable {
         this.logged = false;
         this.admin = false;
         this.chartVerified = false;
+        this.ordersList = null;
         return "index";
     }
     
+    public String adminChart(){
+        this.adminOrdersList = this.ordersFacade.getOrdersForAdmin();
+        return "todo";//HAY QUE HACER PAG PA LISTA DEL ADMIN 
+    }
+    
     public String chartOption(){
-        if (this.logged){
-            if (!this.ordersList.isEmpty() && this.chartVerified){
-                for(int i = 0; i < this.ordersList.size(); i++){
-                    Dvd dvd;
-                    dvd = dvdFacade.find(this.ordersList.get(i).getDvd().getIdDVDs());
-                    if (dvd.getQuantity() < this.ordersList.get(i).getDvd().getQuantity()){
-                        this.ordersList.get(i).setSetShippable(false);
-                    }else{
-                        this.ordersList.get(i).setSetShippable(true);
+
+            if (this.logged){
+               if (!this.ordersList.isEmpty() && this.chartVerified){
+                    for(int i = 0; i < this.ordersList.size(); i++){
+                        Dvd dvd;
+                        dvd = dvdFacade.find(this.ordersList.get(i).getDvd().getIdDVDs());
+                        if (dvd.getQuantity() < this.ordersList.get(i).getDvd().getQuantity()){
+                            this.ordersList.get(i).setSetShippable(false);
+                        }else{
+                            this.ordersList.get(i).setSetShippable(true);
+                        }
                     }
+                    this.chartVerified = true;
+                    return "mychart_verify";
+                }else{
+                    return "mychart";
                 }
-                this.chartVerified = true;
-                return "mychart_verify";
             }else{
                 return "mychart";
             }
-        }else{
-            return "mychart";
-        }
+        
     }
                     
 }
