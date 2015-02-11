@@ -63,6 +63,22 @@ public class OrdersFacade extends AbstractFacade<Orders> {
         return list;
     }
     
+    public List<Orders> getDispatchedOrders(){
+        List<Orders> list = new ArrayList<>();
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'Effectue' OR o.status = 'En Cours'");
+        try {
+            q.getSingleResult();
+        } catch (NoResultException e1) {
+            return list;
+        } catch (NonUniqueResultException e2) {
+            list = q.getResultList();
+            return list;
+        }
+        list = q.getResultList();
+        return list;
+
+    }
+    
     public List<Orders> getOrdersEnAttente(){
         List<Orders> list = new ArrayList<>();
         Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'En attente'");

@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <div class="tituloSecciones">My Chart</div>
-        <ui:repeat value="#{sesionBean.ordersList}" var="o">
+        <ui:repeat value="#{sesionBean.chartList}" var="o">
             <div class="found">
                 <h:form>
                     <table style="width: inherit">
@@ -82,7 +82,7 @@
             </div>            
         </ui:repeat>
 
-        <ui:fragment rendered="#{sesionBean.ordersList.size()>0}">
+        <ui:fragment rendered="#{sesionBean.chartList.size()>0}">
             <div class="footer" style="text-align: center">
                 <h:form>
                     <h:commandButton action="#{ordersView.payGestion()}" value="Pay !" class="actionBtn">
@@ -91,7 +91,7 @@
             </div>
         </ui:fragment>
         
-        <ui:fragment rendered="#{sesionBean.ordersList.size()==0}">
+        <ui:fragment rendered="#{sesionBean.chartList.size()==0}">
             <div class="result">
                 <h3 style="text-align: center">Empty chart.</h3>
                 <h2 style="text-align: center; font-size: 30px">Buy something !</h2>

@@ -50,13 +50,13 @@ public class OrdersView {
     
     public String payGestion(){
         if (sesion.isLogged()){
-            for(int i = 0; i < sesion.getOrdersList().size(); i++){
+            for(int i = 0; i < sesion.getChartList().size(); i++){
                 Dvd dvd;
-                dvd = dvdFacade.find(sesion.getOrdersList().get(i).getDvd().getIdDVDs());
-                if (dvd.getQuantity() < sesion.getOrdersList().get(i).getDvd().getQuantity()){
-                    sesion.getOrdersList().get(i).setSetShippable(false);
+                dvd = dvdFacade.find(sesion.getChartList().get(i).getDvd().getIdDVDs());
+                if (dvd.getQuantity() < sesion.getChartList().get(i).getDvd().getQuantity()){
+                    sesion.getChartList().get(i).setSetShippable(false);
                 }else{
-                    sesion.getOrdersList().get(i).setSetShippable(true);
+                    sesion.getChartList().get(i).setSetShippable(true);
                 }
             }
             sesion.setChartVerified(true);
@@ -71,20 +71,28 @@ public class OrdersView {
                 || sesion.getCreditCardExpirationDate().equals("")){
             return "paypage_wrong";
         }else{
-            for (int i = 0; i < sesion.getOrdersList().size(); i++){
+            for (int i = 0; i < sesion.getChartList().size(); i++){
                 Orders order = new Orders();
-                order.setDvdidDVDs(sesion.getOrdersList().get(i).getDvd());
+                order.setDvdidDVDs(sesion.getChartList().get(i).getDvd());
                 order.setUsersidUser(sesion.getUser());
-                if(sesion.getOrdersList().get(i).isShippable()){
+                if(sesion.getChartList().get(i).isShippable()){
                     order.setStatus("En cours");
+                    dvdFacade.updateDvdSubstract(sesion.getChartList().get(i).getDvd());
                 }else{
                     order.setStatus("En attente");
                 } 
-                order.setQuantity(sesion.getOrdersList().get(i).getDvd().getQuantity());
+                order.setQuantity(sesion.getChartList().get(i).getDvd().getQuantity());
                 ordersFacade.create(order);
             }
             return "index_afterpay";
         }        
     }
+        
+    
+    public String getDispatchedOrders(){
+        this.sesion.setOrdersList(this.ordersFacade.getDispatchedOrders());        
+        return "dispatched_orders";
+    }
+    
     
 }

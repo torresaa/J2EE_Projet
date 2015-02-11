@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <div class="tituloSecciones">My Chart</div>
-        <ui:repeat value="#{sesionBean.ordersList}" var="o">
+        <ui:repeat value="#{sesionBean.chartList}" var="o">
             <ui:fragment rendered="#{o.shippable}"> 
                 <div class="shippeable">
                     <ui:insert name="info">
@@ -163,7 +163,7 @@
             </ui:fragment>
         </ui:repeat>
        
-        <ui:fragment rendered="#{sesionBean.ordersList.size()>0}">
+        <ui:fragment rendered="#{sesionBean.chartList.size()>0}">
             <div class="result">
                 <h4 style="display: inline">
                     The order(s) on <class style="color: red; display: inline"> RED </class> can not be shippeable now.
