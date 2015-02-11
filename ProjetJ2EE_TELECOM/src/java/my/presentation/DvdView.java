@@ -8,6 +8,7 @@ package my.presentation;
 import boundary.AuthorFacade;
 import boundary.DirectorFacade;
 import boundary.DvdFacade;
+import boundary.OrdersFacade;
 import entities.Author;
 import entities.Director;
 import entities.Dvd;
@@ -27,7 +28,8 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "dvdView")
 @RequestScoped
 public class DvdView {
-
+    @EJB
+    private OrdersFacade ordersFacade;
     @EJB
     private DirectorFacade directorFacade;
     @EJB
@@ -164,6 +166,11 @@ public class DvdView {
         }
     }
 
+    public String updateDvd(Dvd dvd){
+        this.dvdFacade.updateDvdAdd(dvd);
+        this.ordersFacade.changeStatus(dvd);
+        return "stock_list";
+    }
 //    public String findByAuthor(){
 //        if (dvdFacade.findDvdByAuthor(toFind) == null){
 //            return "nothing";

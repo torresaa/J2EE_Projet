@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import entities.Dvd;
 import entities.Orders;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,8 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     
     public List<Orders> getOrdersForAdmin(){
         List<Orders> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'En cours' OR o.status = 'En attente'");
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st OR o.status = :stt")
+                .setParameter("st", "En cours").setParameter("stt", "En attente");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -50,7 +52,8 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     
     public List<Orders> getOrdersEnCours(){
         List<Orders> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'En cours'");
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st")
+                .setParameter("st", "En cours");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -65,7 +68,8 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     
     public List<Orders> getDispatchedOrders(){
         List<Orders> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'Effectue' OR o.status = 'En Cours'");
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st OR o.status = :stt")
+                .setParameter("st", "Effectue").setParameter("stt", "En cours");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -81,7 +85,7 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     
     public List<Orders> getOrdersEnAttente(){
         List<Orders> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'En attente'");
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st").setParameter("st", "En attente");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -96,7 +100,8 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     
     public List<Orders> getOrdersEffectue(){
         List<Orders> list = new ArrayList<>();
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = 'Effectue'");
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st")
+                .setParameter("st", "Effectue");
         try {
             q.getSingleResult();
         } catch (NoResultException e1) {
@@ -109,4 +114,24 @@ public class OrdersFacade extends AbstractFacade<Orders> {
         return list;
     }
     
+    public void changeStatus(Dvd dvd){
+        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.dvdidDVDs.idDVDs = :id AND o.status = :st AND o.quantity < :q")
+                .setParameter("id", dvd.getIdDVDs()).setParameter("st", "En attente")
+                .setParameter("q", dvd.getQuantity());
+        List<Orders> list = new ArrayList<>();
+        list = q.getResultList();
+        if (!list.isEmpty()){
+            for (int i = 0; i < list.size(); i++){
+                if(dvd.getQuantity()>0 && list.get(i).getQuantity() < dvd.getQuantity()){
+                    q = em.createQuery("UPDATE Orders o SET o.status = :st WHERE o.idOrder = :id")
+                            .setParameter("id", list.get(i).getIdOrder()).setParameter("st", "En cours");
+                    q.executeUpdate();
+                    q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity - :q WHERE d.idDVDs = :id")
+                            .setParameter("q", list.get(i).getQuantity()).setParameter("id", dvd.getIdDVDs());
+                    q.executeUpdate();
+                    dvd.setQuantity(dvd.getQuantity()-list.get(i).getQuantity());
+                }
+            }
+        }
+    }
 }

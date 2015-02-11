@@ -49,6 +49,7 @@ public class SesionBean implements Serializable {
         this.logged = false;
         this.admin = false;
         this.chartVerified = false;
+        
     }    
 
     public List<Orders> getOrdersList() {

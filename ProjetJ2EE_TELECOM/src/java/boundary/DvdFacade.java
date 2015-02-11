@@ -87,10 +87,12 @@ public class DvdFacade extends AbstractFacade<Dvd> {
     public void updateDvdAdd(Dvd dvd){
         Query q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity + :quantity WHERE d.idDVDs = :id")
                 .setParameter("quantity", dvd.getQuantity()).setParameter("id", dvd.getIdDVDs());
+        q.executeUpdate();
     }
     
     public void updateDvdSubstract(Dvd dvd){
         Query q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity - :quantity WHERE d.idDVDs = :id")
                 .setParameter("quantity", dvd.getQuantity()).setParameter("id", dvd.getIdDVDs());
+        q.executeUpdate();
     }
 }
