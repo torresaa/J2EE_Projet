@@ -32,6 +32,10 @@ public class Orders implements Serializable {
     @ManyToOne(optional = false)    
     private Users usersidUser;    
 
+    public boolean isSent(){
+        return this.status.equals("En cours");
+    }
+    
     public Integer getIdOrder() {
         return idOrder;
     }

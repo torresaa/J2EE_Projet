@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <div class="tituloSecciones">Result(s)</div>
+        <h:form>
+            <ui:repeat value="#{sesionBean.ordersList}" var="o">
+
+                <div class="found">
+                    <table style="width: inherit">
+                        <tr>
+                            <td style="width: 100px; height: 100px">
+                                <!--                            Here is for future picture-->
+                            </td>
+                            <td style="width: available">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Title:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvdidDVDs.dvdTitle}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Author:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvdidDVDs.authoridAuthor.authorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Director:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.dvdidDVDs.directoridDirector.directorName}
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="height: 10px"></tr>
+                                </table>
+                            </td>
+                            <td style="width: 50px"></td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="field">
+                                                Quantity:
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="valeu">
+                                                #{o.quantity}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td>
+                                <table>
+                                    <tr>
+                                        <a class="field">
+                                            Customer:
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <a class="valeu">
+                                            #{o.usersidUser.name}
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <a class="field">
+                                            Email:
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <a class="valeu">
+                                            #{o.usersidUser.email}
+                                        </a>
+                                    </tr>                             
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <a class="field">
+                                            Status:
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <a class="valeu">
+                                            #{o.status}
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <ui:fragment rendered="#{o.sent}">
+                                            <h:form>
+                                                <h:commandButton value="Delivered" action="#{ordersView.deliveredOrder(o)}">
+                                                    
+                                                </h:commandButton>
+                                            </h:form>                                                
+                                        </ui:fragment>
+                                        
+                                    </tr>                             
+                                </table>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>            
+            </ui:repeat>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

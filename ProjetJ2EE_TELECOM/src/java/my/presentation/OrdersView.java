@@ -94,5 +94,9 @@ public class OrdersView {
         return "dispatched_orders";
     }
     
+    public String deliveredOrder(Orders order){
+        this.ordersFacade.setOrderDelivered(order);
+        return this.getDispatchedOrders();
+    }
     
 }

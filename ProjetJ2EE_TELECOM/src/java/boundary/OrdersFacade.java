@@ -83,6 +83,12 @@ public class OrdersFacade extends AbstractFacade<Orders> {
 
     }
     
+    public void setOrderDelivered(Orders order){
+        Query q = em.createQuery("UPDATE Orders o SET o.status = :st WHERE o.idOrder = :id")
+                .setParameter("st", "Effectue").setParameter("id", order.getIdOrder());
+        q.executeUpdate();
+    }
+    
     public List<Orders> getOrdersEnAttente(){
         List<Orders> list = new ArrayList<>();
         Query q = em.createQuery("SELECT o FROM Orders o WHERE o.status = :st").setParameter("st", "En attente");
