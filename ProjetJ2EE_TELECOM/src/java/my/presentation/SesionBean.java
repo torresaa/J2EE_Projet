@@ -18,7 +18,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-
 /**
  *
  * @author aquilest
@@ -26,10 +25,11 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sesionBean")
 @SessionScoped
 public class SesionBean implements Serializable {
+
     @EJB
-    private OrdersFacade ordersFacade;    
+    private OrdersFacade ordersFacade;
     @EJB
-    private DvdFacade dvdFacade;      
+    private DvdFacade dvdFacade;
     private String header;
     private String toFind = "";
 
@@ -38,18 +38,20 @@ public class SesionBean implements Serializable {
     private boolean admin;
     private boolean chartVerified;
     private List<Product> chartList = new ArrayList<>();
-    private List<Dvd> dvdList = new ArrayList<>();   
+    private List<Dvd> dvdList = new ArrayList<>();
     private List<Orders> ordersList = new ArrayList<>();
     private int creditCardNumber = 0;
     private String creditCardExpirationDate = "";
     private int creditCardCode = 0;
+
+    private String status = null;
 
     public SesionBean() {
         this.user = new Users();
         this.logged = false;
         this.admin = false;
         this.chartVerified = false;
-    }    
+    }
 
     public List<Orders> getOrdersList() {
         return ordersList;
@@ -57,6 +59,14 @@ public class SesionBean implements Serializable {
 
     public void setOrdersList(List<Orders> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getCreditCardNumber() {
@@ -90,7 +100,7 @@ public class SesionBean implements Serializable {
     public void setChartVerified(boolean chartVerified) {
         this.chartVerified = chartVerified;
     }
-        
+
     public List<Dvd> getDvdList() {
         return dvdList;
     }
@@ -98,7 +108,7 @@ public class SesionBean implements Serializable {
     public void setDvdList(List<Dvd> dvdList) {
         this.dvdList = dvdList;
     }
-            
+
     public Users getUser() {
         return user;
     }
@@ -131,16 +141,16 @@ public class SesionBean implements Serializable {
         this.chartList = chartList;
     }
 
-    public String insertOrder(Dvd dvd) {       
+    public String insertOrder(Dvd dvd) {
         Product product = new Product(dvd);
         this.chartList.add(product);
         return "found";
     }
 
-    public void removeOder(Product dvd) {        
+    public void removeOder(Product dvd) {
         this.chartList.remove(dvd);
     }
-    
+
     public String getToFind() {
         return toFind;
     }
@@ -156,8 +166,8 @@ public class SesionBean implements Serializable {
     public void setHeader(String header) {
         this.header = header;
     }
-    
-    public String logOut(){
+
+    public String logOut() {
         this.user = null;
         this.logged = false;
         this.admin = false;
@@ -167,44 +177,54 @@ public class SesionBean implements Serializable {
         this.ordersList = null;
         return "index";
     }
-    
-    public String displayStock(){
+
+    public String displayStock() {
         this.dvdList = dvdFacade.findAll();
         return "stock_list";
         //HAY QUE HACER PAG PA LISTA DEL ADMIN 
-    }    
-    
-    public String updateDvd(Dvd dvd){
+    }
+
+    public String updateDvd(Dvd dvd) {
         dvdFacade.updateDvdAdd(dvd);
         return "stock_list";
     }
-    
-    public String chartOption(){
 
-            if (this.logged){
-               if (!this.chartList.isEmpty() && this.chartVerified){
-                    for(int i = 0; i < this.chartList.size(); i++){
-                        Dvd dvd;
-                        dvd = dvdFacade.find(this.chartList.get(i).getDvd().getIdDVDs());
-                        if (dvd.getQuantity() < this.chartList.get(i).getDvd().getQuantity()){
-                            this.chartList.get(i).setSetShippable(false);
-                        }else{
-                            this.chartList.get(i).setSetShippable(true);
-                        }
+    public String chartOption() {
+
+        if (this.logged) {
+            if (!this.chartList.isEmpty() && this.chartVerified) {
+                for (int i = 0; i < this.chartList.size(); i++) {
+                    Dvd dvd;
+                    dvd = dvdFacade.find(this.chartList.get(i).getDvd().getIdDVDs());
+                    if (dvd.getQuantity() < this.chartList.get(i).getDvd().getQuantity()) {
+                        this.chartList.get(i).setSetShippable(false);
+                    } else {
+                        this.chartList.get(i).setSetShippable(true);
                     }
-                    this.chartVerified = true;
-                    return "mychart_verify";
-                }else{
-                    return "mychart";
                 }
-            }else{
+                this.chartVerified = true;
+                return "mychart_verify";
+            } else {
                 return "mychart";
             }
-        
+        } else {
+            return "mychart";
+        }
+
     }
-    
-    public void setIndexAdmin(){
+
+    public void setIndexAdmin() {
         this.ordersList = null;
         this.ordersList = ordersFacade.getOrdersEnAttente();
     }
+    
+    public boolean isStatusNull(){
+        return this.status == null;
+        //return this.status.equals("");
+    }
+    
+    public boolean isStatusOk(){
+        return this.status.equals("ok");
+    }
+    
 }

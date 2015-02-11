@@ -11,14 +11,12 @@ import boundary.DvdFacade;
 import entities.Author;
 import entities.Director;
 import entities.Dvd;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -114,7 +112,7 @@ public class DvdView {
         if (dvd.getQuantity() == 0 || dvd.getDvdTitle().equals("")
                 || this.directorName.equals("")
                 || this.authorName.equals("")) {
-            return "notvalidpost";
+            return "addNewDvd?status=fail";
         } else {
             if (authorFacade.findByName(authorName) == null) {
                 author.setAuthorName(authorName);
@@ -127,7 +125,7 @@ public class DvdView {
             dvd.setAuthoridAuthor(authorFacade.findByName(authorName));
             dvd.setDirectoridDirector(directorFacade.findByName(directorName));
             dvdFacade.create(dvd);
-            return "posted";
+            return "addNewDvd?status=ok";
         }
     }
 

@@ -4,15 +4,38 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="/WEB-INF/templates/template.xhtml">
+    <f:metadata>
+        <f:viewParam name="status" value="#{sesionBean.status}"/>
+    </f:metadata>
 
     <ui:define name="content">
-            <h:form>
-                Add Dvd to the DB: <br/><br/>                                
-                <h:outputLabel value="Dvd Title:"/><h:inputText value="#{dvdView.dvd.dvdTitle}"/><br/>
-                <h:outputLabel value="Dvd Quantity:"/><h:inputText value="#{dvdView.dvd.quantity}"/><br/>
-                <h:outputLabel value="Dvd Director:"/><h:inputText value="#{dvdView.directorName}"/><br/>
-                <h:outputLabel value="Dvd Author:"/><h:inputText value="#{dvdView.authorName}"/><br/>
-                <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                                                                        
-            </h:form>
+        <h:form>
+            Add Dvd to the DB: <br/><br/>                                
+            <h:outputLabel value="Dvd Title:"/><h:inputText value="#{dvdView.dvd.dvdTitle}"/><br/>
+            <h:outputLabel value="Dvd Quantity:"/><h:inputText value="#{dvdView.dvd.quantity}"/><br/>
+            <h:outputLabel value="Dvd Director:"/><h:inputText value="#{dvdView.directorName}"/><br/>
+            <h:outputLabel value="Dvd Author:"/><h:inputText value="#{dvdView.authorName}"/><br/>
+            <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                                                                        
+        </h:form>
+
+        <ui:fragment rendered="#{!sesionBean.statusNull}">
+            <ui:fragment rendered="#{sesionBean.statusOk}">
+                <div class="result">
+                    <h2 style="color: green">
+                        New DVD added ! .
+                    </h2>
+                </div>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{!sesionBean.statusOk}">
+                <div class="result">
+                    <h2 style="color: red">
+                        Dvd can not be added, review the fields valeu.
+                    </h2>
+                </div>
+            </ui:fragment>
+        </ui:fragment>
+
     </ui:define>
+
 </ui:composition>
