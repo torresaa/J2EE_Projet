@@ -18,7 +18,7 @@
             <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                                                                        
         </h:form>
 
-        <ui:fragment rendered="#{!sesionBean.statusNull}">
+        <ui:fragment rendered="#{sesionBean.statusNull}">
             <ui:fragment rendered="#{sesionBean.statusOk}">
                 <div class="result">
                     <h2 style="color: green">

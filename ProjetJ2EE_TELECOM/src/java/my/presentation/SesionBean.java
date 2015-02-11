@@ -44,7 +44,7 @@ public class SesionBean implements Serializable {
     private String creditCardExpirationDate = "";
     private int creditCardCode = 0;
 
-    private String status = null;
+    private String status = "";
 
     public SesionBean() {
         this.user = new Users();
@@ -219,8 +219,8 @@ public class SesionBean implements Serializable {
     }
     
     public boolean isStatusNull(){
-        return this.status == null;
-        //return this.status.equals("");
+        //return this.status == null;
+        return this.status.equals("");
     }
     
     public boolean isStatusOk(){
