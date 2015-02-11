@@ -13,58 +13,108 @@
         <f:view>
             <section id="header" class="header">
                 <div id="title" >
-                    <h1>e-commerce</h1>
+                    <h1>e-DVD Shop</h1>
                 </div>
-                <div>
-                    <ul id="menu">
-                        <li id="li_rigth">
-                            <h:link outcome="index">
-                                <h4>SEARCH</h4>
-                            </h:link>
-                        </li>
 
-                        <ui:fragment rendered="#{!sesionBean.logged}"> 
-                            <li id="li_left">
-                                <h:link outcome="login">
-                                    <h4>LOGIN</h4>
-                                </h:link>
-                            </li>
-                            <li id="li_left">
-                                <h:link outcome="signup">
-                                    <h4>SIGNUP</h4>
-                                </h:link>
-                            </li>
-                        </ui:fragment>
-
-                        <ui:fragment rendered="#{sesionBean.logged}"> 
-                            <div id="li_left">
-                                <table>
-                                    <tr>
-                                        <td><h4>#{sesionBean.user.name}</h4></td> 
-                                        <td>
-                                            <ui:fragment rendered="#{sesionBean.admin}">
-                                                <h:link outcome="admin"> <h5>(admin)</h5> </h:link> 
-                                            </ui:fragment>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <li id="li_left">
+                <ui:fragment rendered="#{sesionBean.admin}">
+                    <div>
+                        <ul id="menu">
+                            <li id="li_rigth">
                                 <h:form>
-                                    <h:commandLink action="#{sesionBean.logOut()}">
-                                        <h4>Log out</h4>
+                                    <h:commandLink action="#{sesionBean.displayStock()}">
+                                        <h4>STOCK</h4>
                                     </h:commandLink>
                                 </h:form>
                             </li>
-                        </ui:fragment>
 
-                        <li id="li_rigth">
-                            <h:link outcome="#{sesionBean.chartOption()}"><!--<h:link outcome="mychart">-->
-                                <h4>CHART</h4>
-                            </h:link>
-                        </li>
-                    </ul>
-                </div>
+                            <li id="li_rigth">
+                                <h:link outcome="addNewDvd">
+                                    <h4>ADD</h4>
+                                </h:link>
+                            </li>
+
+                            <li id="li_rigth">
+                                <h:form>
+                                    <h:commandLink action="#{ordersView.getDispatchedOrders()}">
+                                        <h4>ORDERS</h4>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+
+                            <ui:fragment rendered="#{sesionBean.logged}"> 
+                                <div id="li_left">
+                                    <table>
+                                        <tr>
+                                            <td><h4>#{sesionBean.user.name}</h4></td> 
+                                            <td>
+                                                <h5>(admin)</h5>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <li id="li_left">
+                                    <h:form>
+                                        <h:commandLink action="#{sesionBean.logOut()}">
+                                            <h4>Log out</h4>
+                                        </h:commandLink>
+                                    </h:form>
+                                </li>
+                            </ui:fragment>
+                        </ul>
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{!sesionBean.admin}">
+                    <div>
+                        <ul id="menu">
+                            <li id="li_rigth">
+                                <h:link outcome="index">
+                                    <h4>SEARCH</h4>
+                                </h:link>
+                            </li>
+
+                            <ui:fragment rendered="#{!sesionBean.logged}"> 
+                                <li id="li_left">
+                                    <h:link outcome="login">
+                                        <h4>LOGIN</h4>
+                                    </h:link>
+                                </li>
+                                <li id="li_left">
+                                    <h:link outcome="signup">
+                                        <h4>SIGNUP</h4>
+                                    </h:link>
+                                </li>
+                            </ui:fragment>
+
+                            <ui:fragment rendered="#{sesionBean.logged}"> 
+                                <div id="li_left">
+                                    <table>
+                                        <tr>
+                                            <td><h4>#{sesionBean.user.name}</h4></td> 
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <li id="li_left">
+                                    <h:form>
+                                        <h:commandLink action="#{sesionBean.logOut()}">
+                                            <h4>Log out</h4>
+                                        </h:commandLink>
+                                    </h:form>
+                                </li>
+                            </ui:fragment>
+
+                            <li id="li_rigth">
+                                <h:link outcome="#{sesionBean.chartOption()}"><!--<h:link outcome="mychart">-->
+                                    <h4>CHART</h4>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </div>
+
+                </ui:fragment>
+
             </section>
             <div id="contentDiv" class="header">
                 <ui:insert name="content">
