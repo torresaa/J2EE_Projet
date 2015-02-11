@@ -27,7 +27,7 @@
                                         </td>
                                         <td>
                                             <a class="valeu">
-                                                #{o.dvdTitle}
+                                                #{o.dvdidDVDs.dvdTitle}
                                             </a>
                                         </td>
                                     </tr>
@@ -40,7 +40,7 @@
                                         </td>
                                         <td>
                                             <a class="valeu">
-                                                #{o.authoridAuthor.authorName}
+                                                #{o.dvdidDVDs.authoridAuthor.authorName}
                                             </a>
                                         </td>
                                     </tr>
@@ -53,7 +53,7 @@
                                         </td>
                                         <td>
                                             <a class="valeu">
-                                                #{o.directoridDirector.directorName}
+                                                #{o.dvdidDVDs.directoridDirector.directorName}
                                             </a>
                                         </td>
                                     </tr>
@@ -66,20 +66,46 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <a class="valeu">
+                                            <a class="field">
                                                 Quantity:
                                             </a>
-                                            <h:inputText maxlength="3" size="3" value="#{o.quantity}">
-                                            </h:inputText>
                                         </td>
                                         <td>
-                                            <h:commandButton value="Add"
-                                                             action="#{sesionBean.insertOrder(o)}" >
-                                            </h:commandButton>
+                                            <a class="valeu">
+                                                #{o.quantity}
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
+
+                            <td>
+                                <table>
+                                    <tr>
+                                        <a class="field">
+                                            Customer:
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <a class="valeu">
+                                            #{o.usersidUser.name}
+                                        </a>
+                                    </tr>
+
+                                    <tr>
+                                        <a class="field">
+                                            Email:
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <a class="valeu">
+                                            #{o.usersidUser.email}
+                                        </a>
+                                    </tr>                             
+                                </table>
+                            </td>
+
                         </tr>
                     </table>
                 </div>            
