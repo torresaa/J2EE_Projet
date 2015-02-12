@@ -218,13 +218,17 @@ public class SesionBean implements Serializable {
         this.ordersList = ordersFacade.getOrdersEnAttente();
     }
     
-    public boolean isStatusNull(){
+    public boolean booleanStatusNull(){
         //return this.status == null;
-        return this.status.equals("");
+        boolean ans = this.status.equals("");
+        //return this.status.equals("");
+        return ans;
     }
     
-    public boolean isStatusOk(){
-        return this.status.equals("ok");
+    public boolean booleanStatusOk(){
+        boolean ans = this.status.equals("ok");
+        //return this.status.equals("ok");
+        return ans;
     }
     
 }

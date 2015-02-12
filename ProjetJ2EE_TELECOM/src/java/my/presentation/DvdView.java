@@ -116,7 +116,7 @@ public class DvdView {
         if (dvd.getQuantity() == 0 || dvd.getDvdTitle().equals("")
                 || this.directorName.equals("")
                 || this.authorName.equals("")) {
-            return "addNewDvd?status=fail";
+            return "addNewDvd_error";
         } else {
             if (authorFacade.findByName(authorName) == null) {
                 author.setAuthorName(authorName);
@@ -129,7 +129,7 @@ public class DvdView {
             dvd.setAuthoridAuthor(authorFacade.findByName(authorName));
             dvd.setDirectoridDirector(directorFacade.findByName(directorName));
             dvdFacade.create(dvd);
-            return "addNewDvd?status=ok";
+            return "addNewDvd_ok";
         }
     }
 

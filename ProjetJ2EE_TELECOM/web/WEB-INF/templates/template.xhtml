@@ -41,6 +41,12 @@
                                 </h:form>
                             </li>
 
+                            <li id="li_rigth">
+                                <h:link outcome="index">
+                                    <h4>INDEX</h4>
+                                </h:link>
+                            </li>
+
                             <ui:fragment rendered="#{sesionBean.logged}"> 
                                 <div id="li_left">
                                     <table>
@@ -106,9 +112,11 @@
                             </ui:fragment>
 
                             <li id="li_rigth">
-                                <h:link outcome="#{sesionBean.chartOption()}"><!--<h:link outcome="mychart">-->
-                                    <h4>CHART</h4>
-                                </h:link>
+                                <h:form>
+                                    <h:commandLink action="#{sesionBean.chartOption()}">
+                                        <h4>CHART</h4>
+                                    </h:commandLink>
+                                </h:form>
                             </li>
                         </ul>
                     </div>

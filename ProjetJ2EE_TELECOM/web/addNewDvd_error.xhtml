@@ -14,5 +14,14 @@
             <h:outputLabel value="Dvd Author:"/><h:inputText value="#{dvdView.authorName}"/><br/>
             <h:commandButton action="#{dvdView.postDvd()}" value="Post Dvd"/><br/><br/>                                                                        
         </h:form>
+
+        <div class="result">
+            <h2 style="color: red">
+                Dvd can not be added, review the fields valeu.
+            </h2>
+        </div>
     </ui:define>
+
+
+
 </ui:composition>

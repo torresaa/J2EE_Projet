@@ -11,7 +11,7 @@
 
             <ui:repeat value="#{sesionBean.ordersList}" var="o">
 
-                <div class="found">
+                <div class="notShippeable">
                     <table style="width: inherit">
                         <tr>
                             <td style="width: 100px; height: 100px">
@@ -79,6 +79,8 @@
                                 </table>
                             </td>
 
+                            <td style="width: 50px"></td>
+
                             <td>
                                 <table>
                                     <tr>
@@ -111,6 +113,12 @@
                 </div>            
             </ui:repeat>
 
+            <ui:fragment rendered="#{sesionBean.ordersList.size() == 0}">
+                <div class="result">
+                    <h2 style="text-align: center; font-size: 30px">No waiting orders.</h2>
+                </div>
+            </ui:fragment>
+
         </ui:fragment>
 
         <ui:fragment rendered="#{!sesionBean.admin}">
@@ -119,5 +127,6 @@
                 <h:commandButton action="#{dvdView.findDvd()}" value="Go!"/><br/><br/>                
             </h:form>
         </ui:fragment> 
+
     </ui:define>
 </ui:composition>
