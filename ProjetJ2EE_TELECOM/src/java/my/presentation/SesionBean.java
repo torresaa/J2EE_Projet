@@ -172,9 +172,9 @@ public class SesionBean implements Serializable {
         this.logged = false;
         this.admin = false;
         this.chartVerified = false;
-        this.chartList = null;
-        this.dvdList = null;
-        this.ordersList = null;
+        this.chartList.clear();
+        this.dvdList.clear();
+        this.ordersList.clear();
         return "index";
     }
 
@@ -214,7 +214,7 @@ public class SesionBean implements Serializable {
     }
 
     public void setIndexAdmin() {
-        this.ordersList = null;
+        this.ordersList.clear();
         this.ordersList = ordersFacade.getOrdersEnAttente();
     }
     

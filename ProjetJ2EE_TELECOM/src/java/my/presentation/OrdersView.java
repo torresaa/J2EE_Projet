@@ -96,7 +96,13 @@ public class OrdersView {
     
     public String deliveredOrder(Orders order){
         this.ordersFacade.setOrderDelivered(order);
-        return this.getDispatchedOrders();
+        this.sesion.setOrdersList(this.ordersFacade.getDispatchedOrders());        
+        return "dispatched_orders";
+    }
+    
+    public String indexForAdmin(){
+        this.sesion.setIndexAdmin();
+        return "index";
     }
     
 }

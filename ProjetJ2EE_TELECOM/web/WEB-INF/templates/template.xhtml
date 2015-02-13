@@ -42,9 +42,11 @@
                             </li>
 
                             <li id="li_rigth">
-                                <h:link outcome="index">
-                                    <h4>INDEX</h4>
-                                </h:link>
+                                <h:form>
+                                    <h:commandLink action="#{ordersView.indexForAdmin()}">
+                                        <h4>INDEX</h4>
+                                    </h:commandLink>
+                                </h:form>
                             </li>
 
                             <ui:fragment rendered="#{sesionBean.logged}"> 

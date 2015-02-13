@@ -121,20 +121,24 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     }
     
     public void changeStatus(Dvd dvd){
-        Query q = em.createQuery("SELECT o FROM Orders o WHERE o.dvdidDVDs.idDVDs = :id AND o.status = :st AND o.quantity < :q")
-                .setParameter("id", dvd.getIdDVDs()).setParameter("st", "En attente")
-                .setParameter("q", dvd.getQuantity());
+        Dvd d = new Dvd();
+        Query q = em.createQuery("SELECT d FROM Dvd d WHERE d.idDVDs = :id").setParameter("id", dvd.getIdDVDs());
+        d = (Dvd) q.getSingleResult();
+        q = em.createQuery("SELECT o FROM Orders o WHERE o.dvdidDVDs.idDVDs = :id AND o.status = :st AND o.quantity < :q")
+                .setParameter("id", d.getIdDVDs()).setParameter("st", "En attente").setParameter("q", d.getQuantity());
         List<Orders> list = new ArrayList<>();
         list = q.getResultList();
         if (!list.isEmpty()){
             for (int i = 0; i < list.size(); i++){
-                if(dvd.getQuantity()>0 && list.get(i).getQuantity() < dvd.getQuantity()){
+                if(d.getQuantity() > 0 && list.get(i).getQuantity() <= d.getQuantity()){
                     q = em.createQuery("UPDATE Orders o SET o.status = :st WHERE o.idOrder = :id")
                             .setParameter("id", list.get(i).getIdOrder()).setParameter("st", "En cours");
                     q.executeUpdate();
                     q = em.createQuery("UPDATE Dvd d SET d.quantity = d.quantity - :q WHERE d.idDVDs = :id")
-                            .setParameter("q", list.get(i).getQuantity()).setParameter("id", dvd.getIdDVDs());
+                            .setParameter("q", list.get(i).getQuantity()).setParameter("id", d.getIdDVDs());
                     q.executeUpdate();
+                    q = em.createQuery("SELECT d FROM Dvd d WHERE d.idDVDs = :id").setParameter("id", dvd.getIdDVDs());
+                    d = (Dvd) q.getSingleResult();
                     dvd.setQuantity(dvd.getQuantity()-list.get(i).getQuantity());
                 }
             }
